@@ -73,3 +73,11 @@ Schéma de l'interraction de ces classes entre elles :
 
 La classe `Aircraft` avec la fonction `add_waypoint`, la classe `AirportType` avec les fonctions `air_to_terminal` et `terminal_to_air` ainsi que la classe `Tower` avec `get_instructions` permettent de générer le chemin d'un avion.  
 Le chemin est contenu dans une `std::deque<Waypoint>`, ce qui implémente une FIFO et est parfait pour représenter une route à suivre.  
+
+
+## C- Bidouillons !
+
+**Déterminez à quel endroit du code sont définies les vitesses maximales et accélération de chaque avion. Le Concorde est censé pouvoir voler plus vite que les autres avions. Modifiez le programme pour tenir compte de cela.**  
+
+Les spécifications de chaque avions sont définies dans `AircraftType`. 
+
