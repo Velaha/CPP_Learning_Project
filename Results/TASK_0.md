@@ -79,5 +79,7 @@ Le chemin est contenu dans une `std::deque<Waypoint>`, ce qui implémente une FI
 
 **Déterminez à quel endroit du code sont définies les vitesses maximales et accélération de chaque avion. Le Concorde est censé pouvoir voler plus vite que les autres avions. Modifiez le programme pour tenir compte de cela.**  
 
-Les spécifications de chaque avions sont définies dans `AircraftType`. 
+Les spécifications de chaque avions sont définies dans `AircraftType`.  
+Le Concorde vole maintenant plus vite que les autres avions (.08f au lieu de .05f).  
+
 
