@@ -5,8 +5,8 @@
 **Allez dans le fichier tower_sim.cpp et recherchez la fonction responsable de gérer les inputs du programme. Sur quelle touche faut-il appuyer pour ajouter un avion ? Comment faire pour quitter le programme ? A quoi sert la touche 'F' ?**  
 
 La fonction responsable de gérer les inputs est `create_keystrokes`.  
-Pour ajouter un avion, on utilise la touche `c`. Les touches `q` et `x` permettent de quitter le programme.  
-La touche `f` permet de passer l'affichage en plein-écran.  
+Pour ajouter un avion, on utilise la touche `C`. Les touches `Q` et `X` permettent de quitter le programme.  
+La touche `F` permet de passer l'affichage en plein-écran.  
 
 
 **Ajoutez un avion à la simulation et attendez. Que est le comportement de l'avion ? Quelles informations s'affichent dans la console ?**  
@@ -83,3 +83,15 @@ Les spécifications de chaque avions sont définies dans `AircraftType`.
 Le Concorde vole maintenant plus vite que les autres avions (.08f au lieu de .05f).  
 
 
+**Identifiez quelle variable contrôle le framerate de la simulation. Ajoutez deux nouveaux inputs au programme permettant d'augmenter ou de diminuer cette valeur. Essayez maintenant de mettre en pause le programme en manipulant ce framerate. Que se passe-t-il ?**  
+**Ajoutez une nouvelle fonctionnalité au programme pour mettre le programme en pause, et qui ne passe pas par le framerate.**  
+
+La variable qui contrôle le framerate est `ticks_per_sec`, initialisé au départ avec la variable `DEFAULT_TICKS_PER_SEC` une constante.  
+
+Pour augmenter le framerate on utilisera la touche `A` et pour le diminuer la touche `S`.  
+
+Si on essaie de mettre en pause le programme en passant le framerate à 0, on obtient une erreur de type *floating point exception*.  
+Pour éviter cette erreur, quand on diminue le framerate, on l'empèchera de passer sous `1u`.  
+
+Pour mettre le jeu en pause, on utilisera la touche `P`.  
+Pour ajouter cette fonctionnalité, on créé un flag permettant de savoir si le jeu est actuellement en pause. Si c'est le cas, on ne déplace pas les avions présents à l'image (dans la fonction `timer`).  
