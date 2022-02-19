@@ -90,8 +90,14 @@ La variable qui contrôle le framerate est `ticks_per_sec`, initialisé au dépa
 
 Pour augmenter le framerate on utilisera la touche `A` et pour le diminuer la touche `S`.  
 
-Si on essaie de mettre en pause le programme en passant le framerate à 0, on obtient une erreur de type *floating point exception*.  
+Si on essaie de mettre en pause le programme en passant le framerate à 0, on obtient une erreur de type *`floating point exception`*.  
 Pour éviter cette erreur, quand on diminue le framerate, on l'empèchera de passer sous `1u`.  
 
 Pour mettre le jeu en pause, on utilisera la touche `P`.  
 Pour ajouter cette fonctionnalité, on créé un flag permettant de savoir si le jeu est actuellement en pause. Si c'est le cas, on ne déplace pas les avions présents à l'image (dans la fonction `timer`).  
+
+
+**Identifiez quelle variable contrôle le temps de débarquement des avions et doublez-le.**  
+
+La variable qui contrôle le temps de débarquement est `SERVICE_CYCLES`.  
+
