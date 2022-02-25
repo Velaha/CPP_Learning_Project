@@ -79,8 +79,11 @@ void timer(const int step)
         {
             if (!(*it)->move())
             {
-                std::cout << "erase" << std::endl;
                 it = move_queue.erase(it);
+                // auto tmp = move_queue.erase(it);
+                // delete *it;
+                // it = tmp;
+                // -> segfault
             }
             else
             {
