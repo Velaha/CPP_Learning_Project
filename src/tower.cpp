@@ -34,7 +34,8 @@ WaypointQueue Tower::get_instructions(Aircraft& aircraft)
         }
         else
         {
-            return get_circle();
+            // delete après 5
+            return {};
         }
     }
     else

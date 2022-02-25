@@ -101,3 +101,15 @@ Pour ajouter cette fonctionnalité, on créé un flag permettant de savoir si le
 
 La variable qui contrôle le temps de débarquement est `SERVICE_CYCLES`.  
 
+
+**Lorsqu'un avion a décollé, il réattérit peu de temps après. Faites en sorte qu'à la place, il soit retiré du programme.**  
+**Indices :**  
+**A quel endroit pouvez-vous savoir que l'avion doit être supprimé ?**  
+**Pourquoi n'est-il pas sûr de procéder au retrait de l'avion dans cette fonction ? A quel endroit de la callstack **pourriez-vous le faire à la place ?**  
+**Que devez-vous modifier pour transmettre l'information de la première à la seconde fonction ?**  
+
+L'avion peut être supprimé après avoir redécollé, au moment de l'appel à la fonction `get_instructions`.  
+Si on supprime l'avion à cet endroit, l'itérateur qu'on retrouve plus tard dans `timer` sera invalidé. On pourrai donc plutôt le supprimer directement dans timer en changeant la boucle foreach pour une boucle for avec itérateur.  
+Pour transmettre l'information, il faut modifier le retour de la fonction `move` en `bool`.  
+
+

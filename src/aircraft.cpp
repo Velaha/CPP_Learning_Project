@@ -88,11 +88,17 @@ void Aircraft::add_waypoint(const Waypoint& wp, const bool front)
     }
 }
 
-void Aircraft::move()
+bool Aircraft::move()
 {
     if (waypoints.empty())
     {
+        std::cout << "Now empty waypoint" << std::endl;
         waypoints = control.get_instructions(*this);
+        if (waypoints.empty() && has_served)
+        {
+            std::cout << "false" << std::endl;
+            return false;
+        }
     }
 
     if (!is_at_terminal)
@@ -136,6 +142,7 @@ void Aircraft::move()
         // update the z-value of the displayable structure
         GL::Displayable::z = pos.x() + pos.y();
     }
+    return true;
 }
 
 void Aircraft::display() const
