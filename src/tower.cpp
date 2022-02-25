@@ -35,6 +35,7 @@ WaypointQueue Tower::get_instructions(Aircraft& aircraft)
         else
         {
             // delete après 5
+            aircraft.toggle_served();
             return {};
         }
     }

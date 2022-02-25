@@ -113,3 +113,5 @@ Si on supprime l'avion à cet endroit, l'itérateur qu'on retrouve plus tard dan
 Pour transmettre l'information, il faut modifier le retour de la fonction `move` en `bool`.  
 
 
+**Lorsqu'un objet de type Displayable est créé, il faut ajouter celui-ci manuellement dans la liste des objets à afficher. Il faut également penser à le supprimer de cette liste avant de le détruire. Faites en sorte que l'ajout et la suppression de display_queue soit "automatiquement gérée" lorsqu'un Displayable est créé ou détruit. Pourquoi n'est-il pas spécialement pertinent d'en faire de même pour DynamicObject ?**  
+

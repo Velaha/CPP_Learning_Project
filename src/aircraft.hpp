@@ -63,6 +63,7 @@ public:
 
     void display() const override;
     bool move() override;
+    void toggle_served() { has_served = true; }
 
     friend class Tower;
 };

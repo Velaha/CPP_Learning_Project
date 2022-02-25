@@ -92,11 +92,9 @@ bool Aircraft::move()
 {
     if (waypoints.empty())
     {
-        std::cout << "Now empty waypoint" << std::endl;
         waypoints = control.get_instructions(*this);
         if (waypoints.empty() && has_served)
         {
-            std::cout << "false" << std::endl;
             return false;
         }
     }
