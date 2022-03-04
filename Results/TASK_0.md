@@ -115,8 +115,8 @@ Pour transmettre l'information, il faut modifier le retour de la fonction `move`
 
 **Lorsqu'un objet de type Displayable est créé, il faut ajouter celui-ci manuellement dans la liste des objets à afficher. Il faut également penser à le supprimer de cette liste avant de le détruire. Faites en sorte que l'ajout et la suppression de display_queue soit "automatiquement gérée" lorsqu'un Displayable est créé ou détruit. Pourquoi n'est-il pas spécialement pertinent d'en faire de même pour DynamicObject ?**  
 
-```
-```
+...
+
 
 **La tour de contrôle a besoin de stocker pour tout `Aircraft` le `Terminal` qui lui est actuellement attribué, afin de pouvoir le libérer une fois que l'avion décolle.**  
 **Cette information est actuellement enregistrée dans un `std::vector<std::pair<const Aircraft*, size_t>>` (size_t représentant l'indice du terminal).**  
@@ -124,3 +124,5 @@ Pour transmettre l'information, il faut modifier le retour de la fonction `move`
 **Cela n'est pas grave tant que ce nombre est petit, mais pour préparer l'avenir, on aimerait bien remplacer le vector par un conteneur qui garantira des opérations efficaces, même s'il y a beaucoup de terminaux.**  
 **Modifiez le code afin d'utiliser un conteneur STL plus adapté. Normalement, à la fin, la fonction `find_craft_and_terminal(const Aicraft&)` ne devrait plus être nécessaire.**  
 
+On remplace `std::vector<std::pair<const Aircraft*, size_t>>` par `std::map<const Aircraft*, size_t>`.  
+La fonction `find_craft_and_terminal(const Aicraft&)` n'est plus nécessaire et est remplacée par la fonction `find` associée au map.  
