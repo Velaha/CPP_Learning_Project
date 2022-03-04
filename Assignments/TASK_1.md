@@ -5,7 +5,9 @@
 La création des avions est aujourd'hui gérée par les fonctions `TowerSimulation::create_aircraft` et `TowerSimulation::create_random_aircraft`.
 Chaque avion créé est ensuite placé dans les files `GL::display_queue` et `GL::move_queue`.
 
-Si à un moment quelconque du programme, vous souhaitiez accéder à l'avion ayant le numéro de vol "AF1250", que devriez-vous faire ?
+**Si à un moment quelconque du programme, vous souhaitiez accéder à l'avion ayant le numéro de vol "AF1250", que devriez-vous faire ?**  
+
+Il faudrait parcourir l'ensemble des avions de `GL::move_queue` ou `GL::display_queue` et tester si l'avion rencontré correspond à celui qu'on recherche.  
 
 ---
 
@@ -22,6 +24,10 @@ Vous avez 2 choix possibles :
 Réfléchissez aux pour et contre de chacune de ces options.
 
 Pour le restant de l'exercice, vous partirez sur le premier choix.
+
+...
+
+
 
 ### B - Déterminer le propriétaire de chaque avion
 

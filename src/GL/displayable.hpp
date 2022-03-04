@@ -1,5 +1,6 @@
 #pragma once
 
+#include <algorithm>
 #include <iostream>
 #include <vector>
 
@@ -18,25 +19,10 @@ protected:
     float z = 0;
 
 public:
-    Displayable(const float z_) : z { z_ }
-    {
-        std::cout << "displayable créé" << std::endl;
-        display_queue.emplace_back(this);
-    }
+    Displayable(const float z_) : z { z_ } { display_queue.emplace_back(this); }
     virtual ~Displayable()
     {
-        std::cout << "displayable détruit" << std::endl;
-        for (auto it = display_queue.begin(); it != display_queue.end();)
-        {
-            if ((*it) == this)
-            {
-                it = display_queue.erase(it);
-            }
-            else
-            {
-                it++;
-            }
-        }
+        display_queue.erase(std::find(display_queue.begin(), display_queue.end(), this));
     }
 
     virtual void display() const = 0;
