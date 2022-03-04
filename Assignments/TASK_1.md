@@ -25,7 +25,12 @@ Réfléchissez aux pour et contre de chacune de ces options.
 
 Pour le restant de l'exercice, vous partirez sur le premier choix.
 
-...
+
+Créer une nouvelle classe permettrait de gérer cette responsabilité de manière isolée.  
+D'un autre côté cela alourdirait le programme d'une classe supplémentaire.  
+
+Donner ce rôle à une classe existante multiplierait les responsabilités de cette classe, ce qui n'est pas optimal.  
+Mais on garderait la structure de donnée déjà existante, ce qui serait peut être plus facile à implémenter.  
 
 
 
@@ -35,10 +40,24 @@ Vous allez introduire une nouvelle liste de références sur les avions du progr
 Il serait donc bon de savoir qui est censé détruire les avions du programme, afin de déterminer comment vous allez pouvoir mettre à jour votre gestionnaire d'avions lorsque l'un d'entre eux disparaît.
 
 Répondez aux questions suivantes :
-1. Qui est responsable de détruire les avions du programme ? (si vous ne trouvez pas, faites/continuez la question 4 dans TASK_0)
-2. Quelles autres structures contiennent une référence sur un avion au moment où il doit être détruit ?
-3. Comment fait-on pour supprimer la référence sur un avion qui va être détruit dans ces structures ?
-4. Pourquoi n'est-il pas très judicieux d'essayer d'appliquer la même chose pour votre `AircraftManager` ?
+
+**1. Qui est responsable de détruire les avions du programme ? (si vous ne trouvez pas, faites/continuez la question 4 dans TASK_0)**  
+
+On fait appel à `delete` dans la fonction `timer` du fichier `opengl_interface`.  
+
+**2. Quelles autres structures contiennent une référence sur un avion au moment où il doit être détruit ?**  
+
+Au moment où l'avion doit être détruit, normalement il n'y a que `display_queue` qui contient une référence sur l'avion.  
+Juste avant, `move_queue` contient aussi une référence sur l'avion mais celui-ci est retiré de la liste avant sa suppression.  
+
+**3. Comment fait-on pour supprimer la référence sur un avion qui va être détruit dans ces structures ?**  
+
+On enlève la référence de l'avion dans ces structures avec la fonction `erase` propre au container `std::queue`.  
+
+**4. Pourquoi n'est-il pas très judicieux d'essayer d'appliquer la même chose pour votre `AircraftManager` ?**  
+
+L'`AircraftManager` est censé faciliter l'accès aux données propres aux avions.  Or, on s'est rendu compte plus tôt que les structures déjà présentes n'étaient pas optimales. Il serait donc inutile de reproduire un système qu'on juge non performant.  
+
 
 Pour simplifier le problème, vous allez déplacer l'ownership des avions dans la classe `AircraftManager`.
 Vous allez également faire en sorte que ce soit cette classe qui s'occupe de déplacer les avions, et non plus la fonction `timer`.
