@@ -77,17 +77,15 @@ void timer(const int step)
     {
         for (auto it = move_queue.begin(); it != move_queue.end();)
         {
-            if (!(*it)->move())
+            auto* item = *it;
+            if ((*it)->move())
             {
-                it = move_queue.erase(it);
-                // auto tmp = move_queue.erase(it);
-                // delete *it;
-                // it = tmp;
-                // -> segfault
+                it++;
             }
             else
             {
-                it++;
+                it = move_queue.erase(it);
+                delete item;
             }
         }
     }
