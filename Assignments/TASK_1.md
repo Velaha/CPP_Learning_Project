@@ -68,7 +68,9 @@ Vous allez également faire en sorte que ce soit cette classe qui s'occupe de d�
 
 J'ai ajouté un attribut `aircrafts` de type `std::vector<std::unique_ptr<Aircraft>>` dans la classe `AircraftManager`.  
 
-Ajoutez un nouvel attribut `aircraft_manager` dans la classe `TowerSimulation`.
+**Ajoutez un nouvel attribut `aircraft_manager` dans la classe `TowerSimulation`.**  
+
+Le nouvel attribute `aircraft_manager` de type `AircraftManager` a été ajouté à la classe `TowerSimulation`.  
 
 Faites ce qu'il faut pour que le `AircraftManager` puisse appartenir à la liste `move_queue`.
 Ajoutez la fonction appropriée dans `AircraftManager` pour demander de bouger (`move`) les avions.

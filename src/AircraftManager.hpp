@@ -1,3 +1,5 @@
+#pragma once
+
 #include "aircraft.hpp"
 
 #include <memory>
@@ -9,12 +11,6 @@ private:
     std::vector<std::unique_ptr<Aircraft>> aircrafts;
 
 public:
-    AircraftManager(/* args */);
-    ~AircraftManager();
+    AircraftManager(/* args */) {};
+    ~AircraftManager() {};
 };
-
-AircraftManager::AircraftManager(/* args */)
-{}
-
-AircraftManager::~AircraftManager()
-{}
