@@ -21,10 +21,7 @@ Vous avez 2 choix possibles :
 - créer une nouvelle classe, `AircraftManager`, qui assumera ce rôle,
 - donner ce rôle à une classe existante.
 
-Réfléchissez aux pour et contre de chacune de ces options.
-
-Pour le restant de l'exercice, vous partirez sur le premier choix.
-
+**Réfléchissez aux pour et contre de chacune de ces options.**  
 
 Créer une nouvelle classe permettrait de gérer cette responsabilité de manière isolée.  
 D'un autre côté cela alourdirait le programme d'une classe supplémentaire.  
@@ -32,6 +29,8 @@ D'un autre côté cela alourdirait le programme d'une classe supplémentaire.
 Donner ce rôle à une classe existante multiplierait les responsabilités de cette classe, ce qui n'est pas optimal.  
 Mais on garderait la structure de donnée déjà existante, ce qui serait peut être plus facile à implémenter.  
 
+
+Pour le restant de l'exercice, vous partirez sur le premier choix.
 
 
 ### B - Déterminer le propriétaire de chaque avion
@@ -64,8 +63,10 @@ Vous allez également faire en sorte que ce soit cette classe qui s'occupe de d�
 
 ### C - C'est parti !
 
-Ajoutez un attribut `aircrafts` dans le gestionnaire d'avions.
-Choisissez un type qui met bien en avant le fait que `AircraftManager` est propriétaire des avions.
+**Ajoutez un attribut `aircrafts` dans le gestionnaire d'avions.**  
+**Choisissez un type qui met bien en avant le fait que `AircraftManager` est propriétaire des avions.**  
+
+J'ai ajouté un attribut `aircrafts` de type `std::vector<std::unique_ptr<Aircraft>>` dans la classe `AircraftManager`.  
 
 Ajoutez un nouvel attribut `aircraft_manager` dans la classe `TowerSimulation`.
 

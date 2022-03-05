@@ -1,7 +1,13 @@
+#include "aircraft.hpp"
+
+#include <memory>
+#include <vector>
+
 class AircraftManager
 {
 private:
-    /* data */
+    std::vector<std::unique_ptr<Aircraft>> aircrafts;
+
 public:
     AircraftManager(/* args */);
     ~AircraftManager();
