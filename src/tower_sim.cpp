@@ -10,6 +10,8 @@
 #include <cassert>
 #include <cstdlib>
 #include <ctime>
+#include <memory>
+#include <utility>
 
 using namespace std::string_literals;
 
@@ -30,7 +32,7 @@ TowerSimulation::~TowerSimulation()
     delete airport;
 }
 
-void TowerSimulation::create_aircraft(const AircraftType& type) const
+void TowerSimulation::create_aircraft(const AircraftType& type)
 {
     assert(airport); // make sure the airport is initialized before creating aircraft
 
@@ -39,17 +41,17 @@ void TowerSimulation::create_aircraft(const AircraftType& type) const
     const Point3D start     = Point3D { std::sin(angle), std::cos(angle), 0 } * 3 + Point3D { 0, 0, 2 };
     const Point3D direction = (-start).normalize();
 
-    Aircraft* aircraft = new Aircraft { type, flight_number, start, direction, airport->get_tower() };
-    // GL::display_queue.emplace_back(aircraft);
-    GL::move_queue.emplace(aircraft);
+    auto moveAircraft =
+        std::make_unique<Aircraft>(type, flight_number, start, direction, airport->get_tower());
+    aircraft_manager.add(std::move(moveAircraft));
 }
 
-void TowerSimulation::create_random_aircraft() const
+void TowerSimulation::create_random_aircraft()
 {
     create_aircraft(*(aircraft_types[rand() % 3]));
 }
 
-void TowerSimulation::create_keystrokes() const
+void TowerSimulation::create_keystrokes()
 {
     GL::keystrokes.emplace('x', []() { GL::exit_loop(); });
     GL::keystrokes.emplace('q', []() { GL::exit_loop(); });
@@ -83,6 +85,7 @@ void TowerSimulation::init_airport()
 
     // GL::display_queue.emplace_back(airport);
     GL::move_queue.emplace(airport);
+    GL::move_queue.emplace(&aircraft_manager);
 }
 
 void TowerSimulation::launch()

@@ -72,13 +72,23 @@ J'ai ajouté un attribut `aircrafts` de type `std::vector<std::unique_ptr<Aircra
 
 Le nouvel attribute `aircraft_manager` de type `AircraftManager` a été ajouté à la classe `TowerSimulation`.  
 
-Faites ce qu'il faut pour que le `AircraftManager` puisse appartenir à la liste `move_queue`.
-Ajoutez la fonction appropriée dans `AircraftManager` pour demander de bouger (`move`) les avions.
-Supprimez les ajouts d'`Aircraft` dans la `move_queue`. En effet, ce n'est plus `timer` qui est responsable de déplacer les avions mais l'`AircraftManager`.
-Faites le nécessaire pour que le gestionnaire supprime les avions après qu'ils soient partis de l'aéroport.
+**Faites ce qu'il faut pour que le `AircraftManager` puisse appartenir à la liste `move_queue`.**  
+**Ajoutez la fonction appropriée dans `AircraftManager` pour demander de bouger (`move`) les avions.**  
+**Supprimez les ajouts d'`Aircraft` dans la `move_queue`. En effet, ce n'est plus `timer` qui est responsable de déplacer les avions mais l'`AircraftManager`.**  
+**Faites le nécessaire pour que le gestionnaire supprime les avions après qu'ils soient partis de l'aéroport.**  
 
-Enfin, faites ce qu'il faut pour que `create_aircraft` donne l'avion qu'elle crée au gestionnaire.
-Testez que le programme fonctionne toujours.
+Pour que `AircraftManager` puisse appartenir à la liste `move_queue`, il faut que la classe hérite de `DynamicObject`.  
+Par conséquent, il faut implémenter la fonction `move` définit comme virtuelle pure dans la classe parent.  
+
+On supprime les ajouts d'`Aircraft` dans la move_queue et on les ajoute à l'`AircraftManager` à la place.  
+
+Pour que le gestionnaire supprime les avions après qu'ils soient partis de l'aéroport il faut modifier la fonction `move` de l'`AircraftManager`.  
+
+**Enfin, faites ce qu'il faut pour que `create_aircraft` donne l'avion qu'elle crée au gestionnaire.**  
+**Testez que le programme fonctionne toujours.**  
+
+Le nouvel avion est ajouté à l'`AircraftManager` directement depuis `create_aircraft`.  
+Ainsi les méthodes `create_aircraft`, `create_random_aircraft` et `create_keystrokes` ne sont plus constantes.  
 
 ---
 
