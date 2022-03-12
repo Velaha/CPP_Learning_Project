@@ -30,7 +30,7 @@ Donner ce rôle à une classe existante multiplierait les responsabilités de ce
 Mais on garderait la structure de donnée déjà existante, ce qui serait peut être plus facile à implémenter.  
 
 
-Pour le restant de l'exercice, vous partirez sur le premier choix.
+**Pour le restant de l'exercice, vous partirez sur le premier choix.**  
 
 
 ### B - Déterminer le propriétaire de chaque avion
