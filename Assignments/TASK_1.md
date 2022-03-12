@@ -127,11 +127,23 @@ Effectivement, le programme crash. D'après le message d'erreur, il faudrai appe
 **Afin de faire en sorte que les appels aient lieu dans le bon ordre, vous allez créer une structure `ContextInitializer` dans le fichier `tower_sim.hpp`.**  
 **Vous lui ajouterez un constructeur dont le rôle sera d'appeler les fonctions d'initialisation de `MediaPath`, `glut` et `srand`.**  
 
-Vous pouvez maintenant ajoutez un attribut `context_initializer` de type `ContextInitializer` dans la classe `TowerSimulation`.
-A quelle ligne faut-il définir `context_initializer` dans `TowerSimulation` pour s'assurer que le constructeur de `context_initializer` est appelé avant celui de `factory` ?
+On ajoute une structure `ContextInitializer` dans le fichier `tower_sim.hpp`.  
+On lui fait un constructeur qui appelle les différentes fonctions d'initialisation. Pour cela on reprends les trois premières lignes du constructeur de `TowerSimulation`.  
 
-Refactorisez le restant du code pour utiliser votre factory.
-Vous devriez du coup pouvoir supprimer les variables globales `airlines` et `aircraft_types`.
+
+**Vous pouvez maintenant ajoutez un attribut `context_initializer` de type `ContextInitializer` dans la classe `TowerSimulation`.**  
+**A quelle ligne faut-il définir `context_initializer` dans `TowerSimulation` pour s'assurer que le constructeur de `context_initializer` est appelé avant celui de `factory` ?**  
+
+Pour être sûr que le constructeur de `context_initializer` soit appelé avant ceui de la factory, on déclare la variable de `ContextInitializer` avant celle de `AircraftFactory`.  
+
+
+**Refactorisez le restant du code pour utiliser votre factory.**  
+**Vous devriez du coup pouvoir supprimer les variables globales `airlines` et `aircraft_types`.**  
+
+On initialise le contexte dans le constructeur de `TowerSimulation`.  
+Le programme ne crash plus.  
+On supprime ce qui servait anciennement à construire les avions, avant la création de l'`AircraftFactory`.  
+
 
 ### B - Conflits
 

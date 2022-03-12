@@ -30,10 +30,7 @@ private:
     }
 
 public:
-    AircraftFactory(/* args */) { init_aircraft_types(); };
-    /* init AircraftFactory with :
-     * aircraft_types
-     * */
+    AircraftFactory() { init_aircraft_types(); };
     ~AircraftFactory() {};
 
     std::unique_ptr<Aircraft> create_random_aircraft(Airport* airport)
