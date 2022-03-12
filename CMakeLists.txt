@@ -30,6 +30,7 @@ add_executable(tower
 	src/main.cpp
 
 	src/AircraftManager.hpp
+	src/AircraftFactory.hpp
 )
 
 ###################
