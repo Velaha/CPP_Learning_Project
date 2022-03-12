@@ -25,6 +25,7 @@ private:
 
     std::unique_ptr<Aircraft> create_aircraft(Airport* airport, const AircraftType& type)
     {
+        assert(airport);
         std::string flight_number;
         do
         {
