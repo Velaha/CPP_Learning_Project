@@ -44,22 +44,25 @@ Répondez aux questions suivantes :
 
 On fait appel à `delete` dans la fonction `timer` du fichier `opengl_interface`.  
 
+
 **2. Quelles autres structures contiennent une référence sur un avion au moment où il doit être détruit ?**  
 
 Au moment où l'avion doit être détruit, normalement il n'y a que `display_queue` qui contient une référence sur l'avion.  
 Juste avant, `move_queue` contient aussi une référence sur l'avion mais celui-ci est retiré de la liste avant sa suppression.  
 
+
 **3. Comment fait-on pour supprimer la référence sur un avion qui va être détruit dans ces structures ?**  
 
 On enlève la référence de l'avion dans ces structures avec la fonction `erase` propre au container `std::queue`.  
+
 
 **4. Pourquoi n'est-il pas très judicieux d'essayer d'appliquer la même chose pour votre `AircraftManager` ?**  
 
 L'`AircraftManager` est censé faciliter l'accès aux données propres aux avions.  Or, on s'est rendu compte plus tôt que les structures déjà présentes n'étaient pas optimales. Il serait donc inutile de reproduire un système qu'on juge non performant.  
 
 
-Pour simplifier le problème, vous allez déplacer l'ownership des avions dans la classe `AircraftManager`.
-Vous allez également faire en sorte que ce soit cette classe qui s'occupe de déplacer les avions, et non plus la fonction `timer`.
+**Pour simplifier le problème, vous allez déplacer l'ownership des avions dans la classe `AircraftManager`.**  
+**Vous allez également faire en sorte que ce soit cette classe qui s'occupe de déplacer les avions, et non plus la fonction `timer`.**  
 
 ### C - C'est parti !
 
@@ -68,9 +71,11 @@ Vous allez également faire en sorte que ce soit cette classe qui s'occupe de d�
 
 J'ai ajouté un attribut `aircrafts` de type `std::vector<std::unique_ptr<Aircraft>>` dans la classe `AircraftManager`.  
 
+
 **Ajoutez un nouvel attribut `aircraft_manager` dans la classe `TowerSimulation`.**  
 
 Le nouvel attribute `aircraft_manager` de type `AircraftManager` a été ajouté à la classe `TowerSimulation`.  
+
 
 **Faites ce qu'il faut pour que le `AircraftManager` puisse appartenir à la liste `move_queue`.**  
 **Ajoutez la fonction appropriée dans `AircraftManager` pour demander de bouger (`move`) les avions.**  
@@ -83,6 +88,7 @@ Par conséquent, il faut implémenter la fonction `move` définit comme virtuell
 On supprime les ajouts d'`Aircraft` dans la move_queue et on les ajoute à l'`AircraftManager` à la place.  
 
 Pour que le gestionnaire supprime les avions après qu'ils soient partis de l'aéroport il faut modifier la fonction `move` de l'`AircraftManager`.  
+
 
 **Enfin, faites ce qu'il faut pour que `create_aircraft` donne l'avion qu'elle crée au gestionnaire.**  
 **Testez que le programme fonctionne toujours.**  
@@ -102,15 +108,24 @@ La création des avions est faite à partir des composants suivants :
 - `airlines`
 - `aircraft_types`.
 
-Pour éviter l'usage de variables globales, vous allez créer une classe `AircraftFactory` dont le rôle est de créer des avions.
+**Pour éviter l'usage de variables globales, vous allez créer une classe `AircraftFactory` dont le rôle est de créer des avions.**  
 
-Définissez cette classe, instanciez-là en tant que membre de `TowerSimulation` et refactorisez-le code pour l'utiliser.
-Vous devriez constater que le programme crashe.
+On définit une nouvelle classe `AircraftFactory` qui possèdent les méthodes `init_aircraft_types`, `create_aircraft` et `create_random_aircraft`.  
+Elle possède les différents types d'`aircraft` et d'`airlines`.  
 
-En effet, pour que la factory fonctionne, il faut que le `MediaPath` (avec la fonction `MediaPath::initialize`) et que `glut` (avec la fonction `init_gl()`) aient été initialisés.
-Comme ces appels sont faits depuis le corps du constructeur de `TowerSimulation`, ils sont actuellement exécutés après la construction de la factory.
-Afin de faire en sorte que les appels aient lieu dans le bon ordre, vous allez créer une structure `ContextInitializer` dans le fichier `tower_sim.hpp`.
-Vous lui ajouterez un constructeur dont le rôle sera d'appeler les fonctions d'initialisation de `MediaPath`, `glut` et `srand`.
+
+**Définissez cette classe, instanciez-là en tant que membre de `TowerSimulation` et refactorisez-le code pour l'utiliser.**  
+**Vous devriez constater que le programme crashe.**  
+
+La classe `TowerSimulation` possède maintenant un membre `aircraft_factory` et c'est ce membre qui permet de construire de nouveaux avions à partir de la méthode `create_keystrokes` de `Tower_Simulation`.  
+
+Effectivement, le programme crash. D'après le message d'erreur, il faudrai appeler `MediaPath::initialize()` avant d'essayer de récupérer un chemin depuis `MediaPath`.  
+
+
+**En effet, pour que la factory fonctionne, il faut que le `MediaPath` (avec la fonction `MediaPath::initialize`) et que `glut` (avec la fonction `init_gl()`) aient été initialisés.**  
+**Comme ces appels sont faits depuis le corps du constructeur de `TowerSimulation`, ils sont actuellement exécutés après la construction de la factory.**  
+**Afin de faire en sorte que les appels aient lieu dans le bon ordre, vous allez créer une structure `ContextInitializer` dans le fichier `tower_sim.hpp`.**  
+**Vous lui ajouterez un constructeur dont le rôle sera d'appeler les fonctions d'initialisation de `MediaPath`, `glut` et `srand`.**  
 
 Vous pouvez maintenant ajoutez un attribut `context_initializer` de type `ContextInitializer` dans la classe `TowerSimulation`.
 A quelle ligne faut-il définir `context_initializer` dans `TowerSimulation` pour s'assurer que le constructeur de `context_initializer` est appelé avant celui de `factory` ?
