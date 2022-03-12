@@ -147,9 +147,14 @@ On supprime ce qui servait anciennement à construire les avions, avant la créa
 
 ### B - Conflits
 
-Il est rare, mais possible, que deux avions soient créés avec le même numéro de vol.
-Ajoutez un conteneur dans votre classe `AircraftFactory` contenant tous les numéros de vol déjà utilisés.
-Faites maintenant en sorte qu'il ne soit plus possible de créer deux fois un avion avec le même numéro de vol.
+**Il est rare, mais possible, que deux avions soient créés avec le même numéro de vol.**
+**Ajoutez un conteneur dans votre classe `AircraftFactory` contenant tous les numéros de vol déjà utilisés.**
+**Faites maintenant en sorte qu'il ne soit plus possible de créer deux fois un avion avec le même numéro de vol.**  
+
+On créé un `std::set<std::string>`, dans la classe `AircraftFactory`, chargé de mémoriser tous les noms de vols déjà attribués.  
+Au moment de la création d'un nouvel avion, on choisi un nom de vol et on vérifie qu'il n'a pas déjà été donné. Sinon on en choisit un autre jusqu'à ce que le nom choisi n'ait jamais été attribué.  
+Enfin on ajoute le nom retenu au `set` et on créé l'avion.  
+
 
 ### C - Data-driven AircraftType (optionnel)
 

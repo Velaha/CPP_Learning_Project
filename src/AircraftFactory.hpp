@@ -4,6 +4,8 @@
 #include "aircraft_types.hpp"
 #include "airport.hpp"
 
+#include <set>
+
 class AircraftFactory
 {
 private:
@@ -11,6 +13,8 @@ private:
 
     const static size_t NUM_AIRCRAFT_TYPES = 3;
     AircraftType* aircraft_types[NUM_AIRCRAFT_TYPES] {};
+
+    std::set<std::string> flight_numbers;
 
     void init_aircraft_types()
     {
@@ -21,10 +25,18 @@ private:
 
     std::unique_ptr<Aircraft> create_aircraft(Airport* airport, const AircraftType& type)
     {
-        const std::string flight_number = airlines[std::rand() % 8] + std::to_string(1000 + (rand() % 9000));
+        std::string flight_number;
+        do
+        {
+            flight_number = airlines[std::rand() % 8] + std::to_string(1000 + (rand() % 9000));
+        }
+        while (flight_number.empty() || (flight_numbers.find(flight_number) != flight_numbers.end()));
+
         const float angle       = (rand() % 1000) * 2 * 3.141592f / 1000.f; // random angle between 0 and 2pi
         const Point3D start     = Point3D { std::sin(angle), std::cos(angle), 0 } * 3 + Point3D { 0, 0, 2 };
         const Point3D direction = (-start).normalize();
+
+        flight_numbers.insert(flight_number);
 
         return std::make_unique<Aircraft>(type, flight_number, start, direction, airport->get_tower());
     }
