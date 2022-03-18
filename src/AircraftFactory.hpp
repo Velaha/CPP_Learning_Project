@@ -50,4 +50,6 @@ public:
     {
         return create_aircraft(airport, *(aircraft_types[rand() % 3]));
     }
+
+    std::string print_airlines(int airline) { return airlines[airline]; }
 };

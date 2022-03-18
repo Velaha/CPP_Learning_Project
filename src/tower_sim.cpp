@@ -44,6 +44,15 @@ void TowerSimulation::create_keystrokes()
     GL::keystrokes.emplace('a', []() { GL::change_framerate(1); });
     GL::keystrokes.emplace('s', []() { GL::change_framerate(-1); });
     GL::keystrokes.emplace('p', []() { GL::toggle_pause(); });
+
+    GL::keystrokes.emplace('0', [this]() { std::cout << aircraft_factory.print_airlines(0) << std::endl; });
+    GL::keystrokes.emplace('1', [this]() { std::cout << aircraft_factory.print_airlines(1) << std::endl; });
+    GL::keystrokes.emplace('2', [this]() { std::cout << aircraft_factory.print_airlines(2) << std::endl; });
+    GL::keystrokes.emplace('3', [this]() { std::cout << aircraft_factory.print_airlines(3) << std::endl; });
+    GL::keystrokes.emplace('4', [this]() { std::cout << aircraft_factory.print_airlines(4) << std::endl; });
+    GL::keystrokes.emplace('5', [this]() { std::cout << aircraft_factory.print_airlines(5) << std::endl; });
+    GL::keystrokes.emplace('6', [this]() { std::cout << aircraft_factory.print_airlines(6) << std::endl; });
+    GL::keystrokes.emplace('7', [this]() { std::cout << aircraft_factory.print_airlines(7) << std::endl; });
 }
 
 void TowerSimulation::display_help() const
@@ -51,9 +60,9 @@ void TowerSimulation::display_help() const
     std::cout << "This is an airport tower simulator" << std::endl
               << "the following keysstrokes have meaning:" << std::endl;
 
-    for (const auto& ks_pair : GL::keystrokes)
+    for (const auto& [key, function] : GL::keystrokes)
     {
-        std::cout << ks_pair.first << ' ';
+        std::cout << key << ' ';
     }
 
     std::cout << std::endl;

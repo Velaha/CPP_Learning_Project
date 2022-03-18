@@ -2,6 +2,7 @@
 
 #include "aircraft.hpp"
 
+#include <algorithm>
 #include <memory>
 #include <vector>
 
@@ -16,17 +17,9 @@ public:
 
     bool move()
     {
-        for (auto it = aircrafts.begin(); it != aircrafts.end();)
-        {
-            if ((*it)->move())
-            {
-                it++;
-            }
-            else
-            {
-                it = aircrafts.erase(it);
-            }
-        }
+        auto aircraftToDelete = std::remove_if(aircrafts.begin(), aircrafts.end(),
+                                               [](const auto& item) { return !item->move(); });
+        aircrafts.erase(aircraftToDelete, aircrafts.end());
 
         return true;
     }
