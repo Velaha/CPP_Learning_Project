@@ -129,11 +129,19 @@ bool Aircraft::move()
         }
         else
         {
-            // if we are in the air, but too slow, then we will sink!
+            // if we are in the air
+            fuel -= 1;
+
+            // but too slow, then we will sink!
             const float speed_len = speed.length();
             if (speed_len < SPEED_THRESHOLD)
             {
                 pos.z() -= SINK_FACTOR * (SPEED_THRESHOLD - speed_len);
+            }
+            else if (fuel <= 0)
+            {
+                std::cout << "MAYDAY no more fuel" << std::endl;
+                return false;
             }
         }
 

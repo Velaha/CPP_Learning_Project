@@ -21,6 +21,7 @@ private:
     bool landing_gear_deployed = false; // is the landing gear deployed?
     bool is_at_terminal        = false;
     bool has_served            = false;
+    int fuel                   = std::rand() % ((3000 - 150) + 1) + 150; // random value between 150 and 3000
 
     // turn the aircraft to arrive at the next waypoint
     // try to facilitate reaching the waypoint after the next by facing the

@@ -52,18 +52,24 @@ La fonction `lenght` utilise la fonction `std::reduce`.
 
 ## Objectif 2 - Rupture de kérosène
 
-Vous allez introduire la gestion de l'essence dans votre simulation.\
-Comme le but de ce TP est de vous apprendre à manipuler les algorithmes de la STL, avant d'écrire une boucle, demandez-vous du coup s'il n'existe pas une fonction d'`<algorithm>` ou de `<numeric>` qui permet de faire la même chose.
+**Vous allez introduire la gestion de l'essence dans votre simulation.**  
+**Comme le but de ce TP est de vous apprendre à manipuler les algorithmes de la STL, avant d'écrire une boucle, demandez-vous du coup s'il n'existe pas une fonction d'`<algorithm>` ou de `<numeric>` qui permet de faire la même chose.**  
 
-La notation tiendra compte de votre utilisation judicieuse de la librairie standard. 
+**La notation tiendra compte de votre utilisation judicieuse de la librairie standard.**  
 
 ### A - Consommation d'essence
 
-Ajoutez un attribut `fuel` à `Aircraft`, et initialisez-le à la création de chaque avion avec une valeur aléatoire comprise entre `150` et `3'000`.\
-Décrémentez cette valeur dans `Aircraft::move` si l'avion est en vol.\
-Lorsque cette valeur atteint 0, affichez un message dans la console pour indiquer le crash, et faites en sorte que l'avion soit supprimé du manager.
+**Ajoutez un attribut `fuel` à `Aircraft`, et initialisez-le à la création de chaque avion avec une valeur aléatoire comprise entre `150` et `3'000`.**  
+**Décrémentez cette valeur dans `Aircraft::move` si l'avion est en vol.**  
+**Lorsque cette valeur atteint 0, affichez un message dans la console pour indiquer le crash, et faites en sorte que l'avion soit supprimé du manager.**  
 
-N'hésitez pas à adapter la borne `150` - `3'000`, de manière à ce que des avions se crashent de temps en temps.
+**N'hésitez pas à adapter la borne `150` - `3'000`, de manière à ce que des avions se crashent de temps en temps.**  
+
+On ajoute un attribut `fuel` à `Aircraft` qui s'initialise à une valeur aléatoire entre 150 et 3000 grâce à la fonction `std::rand`.  
+On décrémente cette valeur de 1 à chaque tour de boucle si l'avion est dans le ciel.  
+Lorsque `fuel` atteint 0, on affiche un message de crash et la fonction `move` d'`Aircraft` renvoie `false`, ce qui a pour effet de supprimer l'avion du manager.  
+
+
 
 ### B - Un terminal s'il vous plaît
 
