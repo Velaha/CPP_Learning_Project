@@ -4,6 +4,7 @@
 #include "aircraft_types.hpp"
 #include "airport.hpp"
 
+#include <algorithm>
 #include <set>
 
 class AircraftFactory
@@ -51,5 +52,13 @@ public:
         return create_aircraft(airport, *(aircraft_types[rand() % 3]));
     }
 
-    std::string print_airlines(int airline) { return airlines[airline]; }
+    void print_flights_from_airlines(int airline)
+    {
+        const std::string& current_airline = airlines[airline];
+
+        int nbFlights = std::count_if(flight_numbers.begin(), flight_numbers.end(),
+                                      [current_airline](const std::string& value)
+                                      { return value.find(current_airline) == 0; });
+        std::cout << airlines[airline] << " : " << nbFlights << std::endl;
+    }
 };

@@ -7,7 +7,7 @@
 **`TowerSimulation::display_help()` est chargé de l'affichage des touches disponibles.**  
 **Dans sa boucle, remplacez `const auto& ks_pair` par un structured binding adapté.**  
 
-... 
+Un structure binding plus adapté est de remplacer `const auto& ks_pair` par `const auto& [key, function]`.  
 
 
 
@@ -19,14 +19,17 @@
 
 **Attention : pour cela c'est necessaire que `AircraftManager` stocke les avion dans un `std::vector` ou `std::list` (c'est déjà le cas pour la solution filé).**  
 
-... 
+`AircraftManager` stockait déjà les avions dans un `std::vector` donc il n'y a pas de soucis à ce niveau là.  
+On remplace la boucle for avec itérateur initiale par un appel à `std::remove_if` suivi d'un appel à `erase`.  
+
 
 
 **2. Pour des raisons de statistiques, on aimerait bien être capable de compter tous les avions de chaque airline.**  
 **A cette fin, rajoutez des callbacks sur les touches `0`..`7` de manière à ce que le nombre d'avions appartenant à `airlines[x]` soit affiché en appuyant sur `x`.**  
 **Rendez-vous compte de quelle classe peut acquérir cet information. Utilisez la bonne fonction de `<algorithm>` pour obtenir le résultat.**  
 
-...  
+On ajoute des callbacks sur les touches `0`..`7`.  
+On utilise la fonction `std::count_if` de `<algorithm>` pour compter le nombre d'avions appartenant à une ligne donnée.  
 
 
 
@@ -40,7 +43,9 @@
 **2. `Point3D::operator+=(const Point3D& other)` et `Point3D::operator-=(const Point3D& other)`**  
 **3. `Point3D::length() const`**  
 
-...  
+Les opérateurs `+=`, `-=` et `*=` sont implémentés avec la fonction `std::transform`.  
+La fonction `lenght` utilise la fonction `std::reduce`.  
+
 
 
 ---
