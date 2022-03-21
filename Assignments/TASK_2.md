@@ -137,12 +137,15 @@ On ajoute un appel à la fonction `std::sort` au début de la fonction `Aircraft
 
 ### D - Réapprovisionnement 
 
-Afin de pouvoir repartir en toute sécurité, les avions avec moins de `200` unités d'essence doivent être réapprovisionnés par l'aéroport pendant qu'ils sont au terminal.
+**Afin de pouvoir repartir en toute sécurité, les avions avec moins de `200` unités d'essence doivent être réapprovisionnés par l'aéroport pendant qu'ils sont au terminal.**  
 
-1. Ajoutez une fonction `bool Aircraft::is_low_on_fuel() const`, qui renvoie `true` si l'avion dispose de moins de `200` unités d'essence.\
-Modifiez le code de `Terminal` afin que les avions qui n'ont pas suffisamment d'essence restent bloqués.\
-Testez votre programme pour vérifier que certains avions attendent bien indéfiniment au terminal.
-Si ce n'est pas le cas, essayez de faire varier la constante `200`.
+**1. Ajoutez une fonction `bool Aircraft::is_low_on_fuel() const`, qui renvoie `true` si l'avion dispose de moins de `200` unités d'essence.**  
+**Modifiez le code de `Terminal` afin que les avions qui n'ont pas suffisamment d'essence restent bloqués.**  
+**Testez votre programme pour vérifier que certains avions attendent bien indéfiniment au terminal.**  
+**Si ce n'est pas le cas, essayez de faire varier la constante `200`.**  
+
+On ajoute à `Aircraft` la fonction `is_low_on_fuel`.  
+Pour qu'un avion reste bloqué au niveau du terminal, on vérifie son niveau de fuel dans la fonction `is_servicing`.  
 
 2. Dans `AircraftManager`, implémentez une fonction `get_required_fuel`, qui renvoie la somme de l'essence manquante (le plein, soit `3'000`, moins la quantité courante d'essence) pour les avions vérifiant les conditions suivantes :\
 \- l'avion est bientôt à court d'essence\
