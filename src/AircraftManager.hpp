@@ -17,6 +17,20 @@ public:
 
     bool move()
     {
+        std::sort(aircrafts.begin(), aircrafts.end(),
+                  [](const std::unique_ptr<Aircraft>& a, const std::unique_ptr<Aircraft>& b)
+                  {
+                      if (a->has_terminal())
+                      {
+                          return true;
+                      }
+                      if (b->has_terminal())
+                      {
+                          return false;
+                      }
+                      return a->current_fuel() < b->current_fuel();
+                  });
+
         auto aircraftToDelete = std::remove_if(aircrafts.begin(), aircrafts.end(),
                                                [](const auto& item) { return !item->move(); });
         aircrafts.erase(aircraftToDelete, aircrafts.end());

@@ -102,15 +102,15 @@ La fonction `move` de `Aircraft` se sert maintenant de `reserve_terminal`.
 
 ### C - Minimiser les crashs
 
-Grâce au changement précédent, dès lors qu'un terminal est libéré, il sera réservé lors du premier appel à `Aircraft::move` d'un avion recherchant un terminal.
-Pour vous assurez que les terminaux seront réservés par les avions avec le moins d'essence, vous allez donc réordonner la liste des `aircrafts` avant de les mettre à jour.
+**Grâce au changement précédent, dès lors qu'un terminal est libéré, il sera réservé lors du premier appel à `Aircraft::move` d'un avion recherchant un terminal.**  
+**Pour vous assurez que les terminaux seront réservés par les avions avec le moins d'essence, vous allez donc réordonner la liste des `aircrafts` avant de les mettre à jour.**  
 
-Vous devrez placer au début de la liste les avions qui ont déjà réservé un terminal.\
-Ainsi, ils pourront libérer leurs terminaux avant que vous mettiez à jour les avions qui essayeront de les réserver.
+**Vous devrez placer au début de la liste les avions qui ont déjà réservé un terminal.**  
+**Ainsi, ils pourront libérer leurs terminaux avant que vous mettiez à jour les avions qui essayeront de les réserver.**  
 
-La suite de la liste sera ordonnée selon le niveau d'essence respectif de chaque avion.
+**La suite de la liste sera ordonnée selon le niveau d'essence respectif de chaque avion.**  
 
-Par exemple :
+**Par exemple :**  
 ```b
 A - Reserved / Fuel: 100
 B - NotReserved / Fuel: 50
@@ -118,7 +118,7 @@ C - NotReserved / Fuel: 300
 D - NotReserved / Fuel: 150
 E - Reserved / Fuel: 2500
 ```
-pourra être réordonné en
+**pourra être réordonné en**  
 ```b
 A - Reserved / Fuel: 100
 E - Reserved / Fuel: 2500
@@ -127,8 +127,13 @@ D - NotReserved / Fuel: 150
 C - NotReserved / Fuel: 300
 ```
 
-Assurez-vous déjà que le conteneur `AircraftManager::aircrafts` soit ordonnable (`vector`, `list`, etc).\
-Au début de la fonction `AircraftManager::move`, ajoutez les instructions permettant de réordonner les `aircrafts` dans l'ordre défini ci-dessus.
+**Assurez-vous déjà que le conteneur `AircraftManager::aircrafts` soit ordonnable (`vector`, `list`, etc).**  
+**Au début de la fonction `AircraftManager::move`, ajoutez les instructions permettant de réordonner les `aircrafts` dans l'ordre défini ci-dessus.**  
+
+Le conteneur d'`AircraftManager::aircrafts` est un `vector`, il est donc déjà ordonnable.  
+On ajoute un appel à la fonction `std::sort` au début de la fonction `AircraftManager::move` qui réordonne la liste d'avions selon qu'ils aient déjà réservé un terminal et leur niveau de carburant.  
+
+
 
 ### D - Réapprovisionnement 
 

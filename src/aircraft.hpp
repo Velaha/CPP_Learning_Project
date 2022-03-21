@@ -65,8 +65,10 @@ public:
     void display() const override;
     bool move() override;
     void toggle_served() { has_served = true; }
-    bool has_terminal() const { return !waypoints.empty() && waypoints.back().is_at_terminal(); };
-    bool is_circling() const { return !waypoints.empty() && !has_terminal(); };
+    bool has_terminal() const { return !waypoints.empty() && waypoints.back().is_at_terminal(); }
+    bool is_circling() const { return !waypoints.empty() && !has_terminal(); }
+
+    int current_fuel() { return fuel; }
 
     friend class Tower;
 };
