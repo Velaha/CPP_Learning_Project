@@ -34,8 +34,6 @@ WaypointQueue Tower::get_instructions(Aircraft& aircraft)
         }
         else
         {
-            // delete après 5
-            aircraft.toggle_served();
             return {};
         }
     }
@@ -51,6 +49,7 @@ WaypointQueue Tower::get_instructions(Aircraft& aircraft)
             terminal.finish_service();
             reserved_terminals.erase(it);
             aircraft.is_at_terminal = false;
+            aircraft.toggle_served();
             return airport.start_path(terminal_num);
         }
         else
@@ -74,10 +73,6 @@ WaypointQueue Tower::reserve_terminal(Aircraft& aircraft)
     if (!vp.first.empty())
     {
         reserved_terminals.try_emplace(&aircraft, vp.second);
-        return vp.first;
     }
-    else
-    {
-        return {};
-    }
+    return vp.first;
 }

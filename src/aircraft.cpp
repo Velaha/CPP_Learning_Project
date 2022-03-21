@@ -99,6 +99,15 @@ bool Aircraft::move()
         }
     }
 
+    if (!has_served && is_circling())
+    {
+        WaypointQueue toTerminal = control.reserve_terminal(*this);
+        if (!toTerminal.empty())
+        {
+            waypoints = std::move(toTerminal);
+        }
+    }
+
     if (!is_at_terminal)
     {
         turn_to_waypoint();
@@ -140,7 +149,7 @@ bool Aircraft::move()
             }
             else if (fuel <= 0)
             {
-                std::cout << "MAYDAY no more fuel" << std::endl;
+                std::cout << "MAYDAY " << flight_number << "ran out of fuel" << std::endl;
                 return false;
             }
         }

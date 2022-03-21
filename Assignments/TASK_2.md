@@ -96,7 +96,7 @@ En s'inspirant de `Tower::get_instructions` on créé une nouvelle fonction `Way
 **- si l'avion attend qu'on lui assigne un terminal, on appelle `Tower::reserve_terminal` et on modifie ses `waypoints` si le terminal a effectivement pu être réservé,**  
 **- si l'avion a terminé sa course actuelle, on appelle `Tower::get_instructions` (comme avant).**  
 
-
+La fonction `move` de `Aircraft` se sert maintenant de `reserve_terminal`.  
 
 
 
