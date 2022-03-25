@@ -91,6 +91,7 @@ Les spécifications de chaque avions sont définies dans `AircraftType`.
 Le Concorde vole maintenant plus vite que les autres avions (.08f au lieu de .05f).  
 
 **2) Identifiez quelle variable contrôle le framerate de la simulation.**  
+**Le framerate correspond au temps de rafraichissement du programme, c'est-à-dire le nombre de fois où les éléments du programme seront mis à jour (ajout de nouvel avion à la simulation, déplacement, etc) en une seconde.**  
 **Ajoutez deux nouveaux inputs au programme permettant d'augmenter ou de diminuer cette valeur.**  
 **Essayez maintenant de mettre en pause le programme en manipulant ce framerate. Que se passe-t-il ?**  
 **Ajoutez une nouvelle fonctionnalité au programme pour mettre le programme en pause, et qui ne passe pas par le framerate.**  
@@ -110,7 +111,8 @@ Pour ajouter cette fonctionnalité, on créé un flag permettant de savoir si le
 La variable qui contrôle le temps de débarquement est `SERVICE_CYCLES`.  
 
 **4) Lorsqu'un avion a décollé, il réattérit peu de temps après.**  
-**Faites en sorte qu'à la place, il soit retiré du programme.**  
+**Assurez-vous qu'à la place, il soit supprimé de la `move_queue`.**  
+**Pour tester, il suffit de dézoomer et de vérifier que les avions suffisament éloignés ne bougent plus.**  
 **Indices :**  
 **A quel endroit pouvez-vous savoir que l'avion doit être supprimé ?**  
 **Pourquoi n'est-il pas sûr de procéder au retrait de l'avion dans cette fonction ?**  
@@ -124,6 +126,8 @@ Pour transmettre l'information, il faut modifier le retour de la fonction `move`
 **5) Lorsqu'un objet de type `Displayable` est créé, il faut ajouter celui-ci manuellement dans la liste des objets à afficher.**  
 **Il faut également penser à le supprimer de cette liste avant de le détruire.**  
 **Faites en sorte que l'ajout et la suppression de `display_queue` soit "automatiquement gérée" lorsqu'un `Displayable` est créé ou détruit.**  
+**Essayez maintenant de supprimer complètement l'avion du programme lorsque vous le retirez de la `move_queue`.**  
+**En dézoomant, vous devriez maintenant constater que les avions disparaissent maintenant de l'écran.**  
 **Pourquoi n'est-il pas spécialement pertinent d'en faire de même pour `DynamicObject` ?**  
 
 ...
@@ -144,7 +148,7 @@ La fonction `find_craft_and_terminal(const Aicraft&)` n'est plus nécessaire et 
 1) Comment a-t-on fait pour que seule la classe `Tower` puisse réserver un terminal de l'aéroport ?
 
 2) En regardant le contenu de la fonction `void Aircraft::turn(Point3D direction)`, pourquoi selon-vous ne sommes-nous pas passer par une réference constante ?
-Pensez-vous qu'il soit possible d'éviter la copie du `Point3D` passé en paramètre ?
+Pourquoi n'est-il pas possible d'éviter la copie du `Point3D` passé en paramètre ?
 
 ## E- Bonus
 

@@ -6,6 +6,7 @@ La création des avions est aujourd'hui gérée par les fonctions `TowerSimulati
 Chaque avion créé est ensuite placé dans les files `GL::display_queue` et `GL::move_queue`.
 
 **Si à un moment quelconque du programme, vous souhaitiez accéder à l'avion ayant le numéro de vol "AF1250", que devriez-vous faire ?**  
+**Imaginez et décrivez ce que vous devriez faire si vous souhaitiez accéder à l'avion ayant le numéro de vol "AF1250".**  
 
 Il faudrait parcourir l'ensemble des avions de `GL::move_queue` ou `GL::display_queue` et tester si l'avion rencontré correspond à celui qu'on recherche.  
 
@@ -63,11 +64,12 @@ L'`AircraftManager` est censé faciliter l'accès aux données propres aux avion
 
 **Pour simplifier le problème, vous allez déplacer l'ownership des avions dans la classe `AircraftManager`.**  
 **Vous allez également faire en sorte que ce soit cette classe qui s'occupe de déplacer les avions, et non plus la fonction `timer`.**  
+**Il aura également la responsabilité de les faire bouger.**  
 
 ### C - C'est parti !
 
 **Ajoutez un attribut `aircrafts` dans le gestionnaire d'avions.**  
-**Choisissez un type qui met bien en avant le fait que `AircraftManager` est propriétaire des avions.**  
+**Choisissez un type qui met bien en avant le fait que `AircraftManager` est propriétaire des avions, et vérifiez avec votre chargé de TP qu'il s'agit de la bonne solution.**  
 
 J'ai ajouté un attribut `aircrafts` de type `std::vector<std::unique_ptr<Aircraft>>` dans la classe `AircraftManager`.  
 
@@ -76,6 +78,11 @@ J'ai ajouté un attribut `aircrafts` de type `std::vector<std::unique_ptr<Aircra
 
 Le nouvel attribute `aircraft_manager` de type `AircraftManager` a été ajouté à la classe `TowerSimulation`.  
 
+**La fonction `timer` est implémentée dans la partie GL/ du programme. Celle-ci est complètement indépendente du contenu de l'application, c'est-à-dire qu'elle ne connaît pas les types `Aircraft`, `Airport`, etc.**  
+**Pour conserver cette indépendence, et que `timer` puisse tout de même demander à l'`AircraftManager` de déplacer les avions, `AircraftManager` devra hériter de `DynamicObject` et être inséré dans la `move_queue`.**  
+**Implémentez ensuite `AircraftManager::move` afin que qu'il déplace les avions et supprime ceux qui doivent sortir du programme.**  
+**N'oubliez pas de retirer les ajouts d'avions à la `move_queue`, sinon, ceux-ci seront déplacés et supprimés 2 fois (et par l'`AircraftManager`, et par `timer`).**  
+**Vous pouvez maintenant supprimer la relation d'héritage entre `Aircraft` et `DynamicObject`, puisse que le seul intérêt à être un `DynamicObject`, c'est de pouvoir être placé dans la `move_queue` pour être mis à jour par `timer`.**  
 
 **Faites ce qu'il faut pour que le `AircraftManager` puisse appartenir à la liste `move_queue`.**  
 **Ajoutez la fonction appropriée dans `AircraftManager` pour demander de bouger (`move`) les avions.**  
@@ -144,6 +151,8 @@ On initialise le contexte dans le constructeur de `TowerSimulation`.
 Le programme ne crash plus.  
 On supprime ce qui servait anciennement à construire les avions, avant la création de l'`AircraftFactory`.  
 
+
+Essayez de supprimer au maximum les pointeurs nus, et de les remplacer par des types qui permettent d'exprimer clairement l'ownership. N'hésitez pas à demander des conseils à votre chargé de TP ou à vos camarades.
 
 ### B - Conflits
 
