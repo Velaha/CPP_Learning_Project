@@ -46,20 +46,12 @@ public:
         int required = std::accumulate(aircrafts.begin(), aircrafts.end(), 0,
                                        [](int acc, const auto& cur_aircraft)
                                        {
-                                           // if (cur_aircraft->is_low_on_fuel() &&
-                                           // !cur_aircraft->has_served())
-                                           //{
-                                           //     return acc + (3000 - cur_aircraft->current_fuel());
-                                           // }
-                                           // return acc;
-
                                            if (!cur_aircraft->is_low_on_fuel() || cur_aircraft->has_served())
                                            {
                                                return acc;
                                            }
                                            return acc + (3000 - cur_aircraft->current_fuel());
                                        });
-        std::cout << "required : " << required << std::endl;
         return required;
     }
 };

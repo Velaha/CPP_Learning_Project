@@ -76,3 +76,13 @@ WaypointQueue Tower::reserve_terminal(Aircraft& aircraft)
     }
     return vp.first;
 }
+
+void Tower::freeTerminalFromAircraft(const Aircraft& aircraft)
+{
+    const auto terminal = reserved_terminals.find(&aircraft);
+    if (terminal != reserved_terminals.end())
+    {
+        airport.freeTerminal(terminal->second);
+        reserved_terminals.erase(terminal);
+    }
+}

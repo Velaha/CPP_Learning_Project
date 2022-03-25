@@ -97,5 +97,7 @@ public:
         return true;
     }
 
+    void freeTerminal(size_t terminal) { terminals.at(terminal).freeTerminal(); }
+
     friend class Tower;
 };

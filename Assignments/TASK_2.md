@@ -188,10 +188,20 @@ On modifie la fonction `Airport::move` de manière à pouvoir réapprovisionner 
 
 ### E - Déréservation
 
-Si vous avez suffisamment testé votre programme, vous avez dû vous apercevoir que parfois, certains terminaux arrêtaient d'être réservés et utilisés.\
-En effet, lorsque les avions se crashent alors qu'ils avaient un terminal de réservé, rien n'a été fait pour s'assurer que le terminal allait de nouveau être libre.
+**Si vous avez suffisamment testé votre programme, vous avez dû vous apercevoir que parfois, certains terminaux arrêtaient d'être réservés et utilisés.**  
+**En effet, lorsque les avions se crashent alors qu'ils avaient un terminal de réservé, rien n'a été fait pour s'assurer que le terminal allait de nouveau être libre.**  
 
-Pour garantir cela, vous allez modifier le destructeur de `Aircraft`. Si l'avion a réservé un terminal, assurez-vous que celui-ci est correctement libéré. Pour cela, vous aurez besoin de rajouter une fonction dans la classe `Tower`. Choisissez-lui un nom qui décrit correctement ce qu'elle fait.
+**Pour garantir cela, vous allez modifier le destructeur de `Aircraft`. Si l'avion a réservé un terminal, assurez-vous que celui-ci est correctement libéré. Pour cela, vous aurez besoin de rajouter une fonction dans la classe `Tower`. Choisissez-lui un nom qui décrit correctement ce qu'elle fait.**  
+
+En premier lieu, on précise le destructeur de `Aircraft` afin que le terminal qui lui ai attribué soit libéré.  
+
+Pour ce faire, on ajoute une fonction `freeTerminalFromAircraft(const Aircraft& aircraft)` à la classe `Tower` qui se charge de retrouver le terminal réservé et de demander à l'aéroport de le libérer.  
+Il faut faire attention à bien implémenter cette fonction dans le fichier *.cpp* de `Tower`.  
+
+On rajoute donc une autre fonction `freeTerminal(size_t terminal)` à la classe `Airport` pour demander à sa liste de terminals de libérer le terminal qui correspond à l'indice passé en paramètre.  
+
+Enfin on ajoute une fonction `freeTerminal()` dans la classe `Terminal` qui s'occupe simplement de mettre `current_aircraft` à nullptr.  
+
 
 ### F - Paramétrage (optionnel)
 
