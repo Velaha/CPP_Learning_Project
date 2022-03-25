@@ -11,6 +11,7 @@
 #include "terminal.hpp"
 #include "tower.hpp"
 
+#include <algorithm>
 #include <vector>
 
 class Airport : public GL::Displayable, public GL::DynamicObject
@@ -73,9 +74,25 @@ public:
 
     bool move() override
     {
+        if (next_refill_time == 0)
+        {
+            int old_ordered_fuel = ordered_fuel;
+            fuel_stock += ordered_fuel;
+            ordered_fuel     = std::min(aircraft_manager.get_required_fuel(), 5000);
+            next_refill_time = 100;
+            std::cout << "received fuel : " << old_ordered_fuel << " unit(s)" << std::endl;
+            std::cout << "fuel stock : " << fuel_stock << " unit(s)" << std::endl;
+            std::cout << "ordered fuel : " << ordered_fuel << " unit(s)" << std::endl;
+        }
+        else
+        {
+            --next_refill_time;
+        }
+
         for (auto& t : terminals)
         {
             t.move();
+            t.refill_aircraft_if_needed(fuel_stock);
         }
         return true;
     }

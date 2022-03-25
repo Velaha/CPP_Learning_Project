@@ -75,7 +75,7 @@ public:
     bool is_low_on_fuel() const { return fuel < 200; }
     bool has_served() const { return served; }
 
-    bool refill(int* fuel_stock)
+    void refill(int& fuel_stock)
     {
         int need = 3000 - fuel;
         if (!fuel_stock - need < 0)
@@ -83,9 +83,7 @@ public:
             fuel += need;
             fuel_stock -= need;
             std::cout << "refilled " << flight_number << " with " << need << " fuel unit(s)" << std::endl;
-            return true;
         }
-        return false;
     }
 
     friend class Tower;

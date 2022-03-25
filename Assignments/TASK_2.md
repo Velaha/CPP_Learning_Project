@@ -182,7 +182,7 @@ On définit une fonction `void refill_aircraft_if_needed(int* fuel_stock)` qui a
 **- Sinon `next_refill_time` est décrémenté.**  
 **- Chaque terminal réapprovisionne son avion s'il doit l'être.**  
 
-
+On modifie la fonction `Airport::move` de manière à pouvoir réapprovisionner les avions qui en ont besoin et on entretient le stock de fuel selon l'algorithme décrit ci-dessus.  
 
 ### E - Paramétrage (optionnel)
 

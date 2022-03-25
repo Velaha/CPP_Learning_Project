@@ -51,9 +51,9 @@ public:
         return true;
     }
 
-    void refill_aircraft_if_needed(int* fuel_stock)
+    void refill_aircraft_if_needed(int& fuel_stock)
     {
-        if (current_aircraft->is_low_on_fuel())
+        if (in_use() && current_aircraft->is_low_on_fuel())
         {
             current_aircraft->refill(fuel_stock);
         }
