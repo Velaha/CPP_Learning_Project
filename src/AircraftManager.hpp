@@ -4,6 +4,7 @@
 
 #include <algorithm>
 #include <memory>
+#include <numeric>
 #include <vector>
 
 class AircraftManager : public GL::DynamicObject
@@ -39,4 +40,23 @@ public:
     }
 
     void add(std::unique_ptr<Aircraft> aircraft) { aircrafts.emplace_back(std::move(aircraft)); }
+
+    int get_required_fuel()
+    {
+        return std::accumulate(aircrafts.begin(), aircrafts.end(), 0,
+                               [](int acc, const auto& cur_aircraft)
+                               {
+                                   if (cur_aircraft->is_low_on_fuel() && !cur_aircraft->has_served())
+                                   {
+                                       return acc + (3000 - cur_aircraft->current_fuel());
+                                   }
+                                   return acc;
+
+                                   // if (!cur_aircraft->is_low_on_fuel() || cur_aircraft->has_served())
+                                   //{
+                                   //     return acc;
+                                   // }
+                                   // return acc + (3000 - cur_aircraft->current_fuel());
+                               });
+    }
 };

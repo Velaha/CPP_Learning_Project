@@ -20,7 +20,7 @@ private:
     Tower& control;
     bool landing_gear_deployed = false; // is the landing gear deployed?
     bool is_at_terminal        = false;
-    bool has_served            = false;
+    bool served                = false;
     int fuel                   = std::rand() % ((3000 - 150) + 1) + 150; // random value between 150 and 3000
 
     // turn the aircraft to arrive at the next waypoint
@@ -65,14 +65,15 @@ public:
     void display() const override;
     bool move() override;
 
-    void toggle_served() { has_served = true; }
+    void toggle_served() { served = true; }
 
     bool has_terminal() const { return !waypoints.empty() && waypoints.back().is_at_terminal(); }
     bool is_circling() const { return !waypoints.empty() && !has_terminal(); }
 
-    int current_fuel() { return fuel; }
+    int current_fuel() const { return fuel; }
 
-    bool is_low_on_fuel() const { return fuel < 200; };
+    bool is_low_on_fuel() const { return fuel < 200; }
+    bool has_served() const { return served; }
 
     friend class Tower;
 };

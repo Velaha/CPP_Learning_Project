@@ -93,13 +93,13 @@ bool Aircraft::move()
     if (waypoints.empty())
     {
         waypoints = control.get_instructions(*this);
-        if (waypoints.empty() && has_served)
+        if (waypoints.empty() && served)
         {
             return false;
         }
     }
 
-    if (!has_served && is_circling())
+    if (!served && is_circling())
     {
         WaypointQueue toTerminal = control.reserve_terminal(*this);
         if (!toTerminal.empty())
