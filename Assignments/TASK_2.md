@@ -161,11 +161,12 @@ On ajoute au final quatre nouveaux attributs à la classe `Airport` :
 * trois `int` pour `fuel_stock`, `ordered_fuel` et `next_refill_time`
 * un `const AircraftManager&` pour que la classe ait accès à notre `AircraftManager` pour pouvoir l'interroger mais sans pour autant pouvoir le modifier
 
+**4. Ajoutez une fonction `refill` à la classe `Aircraft`, prenant un paramètre `fuel_stock` par référence non-constante.**  
+**Cette fonction rempliera le réservoir de l'avion en soustrayant ce dont il a besoin de `fuel_stock`.**  
+**Bien entendu, `fuel_stock` ne peut pas devenir négatif.**  
+**Indiquez dans la console quel avion a été réapprovisionné ainsi que la quantité d'essence utilisée.**  
 
-4. Ajoutez une fonction `refill` à la classe `Aircraft`, prenant un paramètre `fuel_stock` par référence non-constante.
-Cette fonction rempliera le réservoir de l'avion en soustrayant ce dont il a besoin de `fuel_stock`.
-Bien entendu, `fuel_stock` ne peut pas devenir négatif.\
-Indiquez dans la console quel avion a été réapprovisionné ainsi que la quantité d'essence utilisée.
+On ajoute une fonction `bool refill(int* fuel_stock)` à la classe `Aircraft`.
 
 5. Définissez maintenant une fonction `refill_aircraft_if_needed` dans la classe `Terminal`, prenant un paramètre `fuel_stock` par référence non-constante.
 Elle devra appeler la fonction `refill` sur l'avion actuellement au terminal, si celui-ci a vraiment besoin d'essence.  
