@@ -1,5 +1,6 @@
 #pragma once
 
+#include "AircraftManager.hpp"
 #include "GL/displayable.hpp"
 #include "GL/dynamic_object.hpp"
 #include "GL/texture.hpp"
@@ -18,8 +19,12 @@ private:
     const AirportType& type;
     const Point3D pos;
     const GL::Texture2D texture;
+    const AircraftManager& aircraft_manager;
     std::vector<Terminal> terminals;
     Tower tower;
+    int fuel_stock       = 0;
+    int ordered_fuel     = 0;
+    int next_refill_time = 0;
 
     // reserve a terminal
     // if a terminal is free, return
@@ -51,11 +56,13 @@ private:
     Terminal& get_terminal(const size_t terminal_num) { return terminals.at(terminal_num); }
 
 public:
-    Airport(const AirportType& type_, const Point3D& pos_, const img::Image* image, const float z_ = 1.0f) :
+    Airport(const AirportType& type_, const Point3D& pos_, const img::Image* image,
+            const AircraftManager& aircraft_manager_, const float z_ = 1.0f) :
         GL::Displayable { z_ },
         type { type_ },
         pos { pos_ },
         texture { image },
+        aircraft_manager { aircraft_manager_ },
         terminals { type.create_terminals() },
         tower { *this }
     {}

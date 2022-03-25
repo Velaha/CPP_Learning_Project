@@ -157,6 +157,9 @@ On implémente la fonction `get_required_fuel` avec un `std::accumulate`.
 **Ajoutez également un attribut `next_refill_time`, aussi initialisé à 0.**  
 **Enfin, faites en sorte que la classe `Airport` ait accès à votre `AircraftManager` de manière à pouvoir l'interroger.**  
 
+On ajoute au final quatre nouveaux attributs à la classe `Airport` : 
+* trois `int` pour `fuel_stock`, `ordered_fuel` et `next_refill_time`
+* un `const AircraftManager&` pour que la classe ait accès à notre `AircraftManager` pour pouvoir l'interroger mais sans pour autant pouvoir le modifier
 
 
 4. Ajoutez une fonction `refill` à la classe `Aircraft`, prenant un paramètre `fuel_stock` par référence non-constante.
