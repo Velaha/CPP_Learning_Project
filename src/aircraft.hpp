@@ -79,9 +79,9 @@ public:
 
     void refill(int& fuel_stock)
     {
-        int need = 3000 - fuel;
-        if (!fuel_stock - need < 0)
+        if (is_at_terminal && fuel_stock > 0)
         {
+            int need = std::min(fuel_stock, 3000 - fuel);
             fuel += need;
             fuel_stock -= need;
             std::cout << "refilled " << flight_number << " with " << need << " fuel unit(s)" << std::endl;

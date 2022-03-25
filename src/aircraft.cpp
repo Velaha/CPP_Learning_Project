@@ -149,7 +149,7 @@ bool Aircraft::move()
             }
             else if (fuel <= 0)
             {
-                std::cout << "MAYDAY " << flight_number << " ran out of fuel" << std::endl;
+                std::cout << flight_number << " ran out of fuel and crashed" << std::endl;
                 return false;
             }
         }
