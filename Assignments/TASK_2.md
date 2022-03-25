@@ -159,26 +159,30 @@ On implémente la fonction `get_required_fuel` avec un `std::accumulate`.
 
 On ajoute au final quatre nouveaux attributs à la classe `Airport` : 
 * trois `int` pour `fuel_stock`, `ordered_fuel` et `next_refill_time`
-* un `const AircraftManager&` pour que la classe ait accès à notre `AircraftManager` pour pouvoir l'interroger mais sans pour autant pouvoir le modifier
+* un `const AircraftManager&` pour que la classe ait accès à notre `AircraftManager` pour pouvoir l'interroger mais sans pour autant pouvoir le modifier  
 
 **4. Ajoutez une fonction `refill` à la classe `Aircraft`, prenant un paramètre `fuel_stock` par référence non-constante.**  
 **Cette fonction rempliera le réservoir de l'avion en soustrayant ce dont il a besoin de `fuel_stock`.**  
 **Bien entendu, `fuel_stock` ne peut pas devenir négatif.**  
 **Indiquez dans la console quel avion a été réapprovisionné ainsi que la quantité d'essence utilisée.**  
 
-On ajoute une fonction `bool refill(int* fuel_stock)` à la classe `Aircraft`.
+On ajoute une fonction `bool refill(int* fuel_stock)` à la classe `Aircraft`.  
 
-5. Définissez maintenant une fonction `refill_aircraft_if_needed` dans la classe `Terminal`, prenant un paramètre `fuel_stock` par référence non-constante.
-Elle devra appeler la fonction `refill` sur l'avion actuellement au terminal, si celui-ci a vraiment besoin d'essence.  
+**5. Définissez maintenant une fonction `refill_aircraft_if_needed` dans la classe `Terminal`, prenant un paramètre `fuel_stock` par référence non-constante.**  
+**Elle devra appeler la fonction `refill` sur l'avion actuellement au terminal, si celui-ci a vraiment besoin d'essence.**  
 
-6. Modifiez la fonction `Airport::move`, afin de mettre-en-oeuvre les étapes suivantes.\
-\- Si `next_refill_time` vaut 0 :\
-    \* `fuel_stock` est incrémenté de la valeur de `ordered_fuel`.\
-    \* `ordered_fuel` est recalculé en utilisant le minimum entre `AircraftManager::get_required_fuel()` et `5'000` (il s'agit du volume du camion citerne qui livre le kérosène).\
-    \* `next_refill_time` est réinitialisé à `100`.\
-    \* La quantité d'essence reçue, la quantité d'essence en stock et la nouvelle quantité d'essence commandée sont affichées dans la console.\
-\- Sinon `next_refill_time` est décrémenté.\
-\- Chaque terminal réapprovisionne son avion s'il doit l'être.
+On définit une fonction `void refill_aircraft_if_needed(int* fuel_stock)` qui appelle la fonction `refill` sur l'avion actuellement au termnial si celui-ci a moins de 200 unités de fuel.  
+
+**6. Modifiez la fonction `Airport::move`, afin de mettre-en-oeuvre les étapes suivantes.**  
+**- Si `next_refill_time` vaut 0 :**  
+    **\* `fuel_stock` est incrémenté de la valeur de `ordered_fuel`.**  
+    **\* `ordered_fuel` est recalculé en utilisant le minimum entre `AircraftManager::get_required_fuel()` et `5'000` (il s'agit du volume du camion citerne qui livre le kérosène).**  
+    **\* `next_refill_time` est réinitialisé à `100`.**  
+    **\* La quantité d'essence reçue, la quantité d'essence en stock et la nouvelle quantité d'essence commandée sont affichées dans la console.**  
+**- Sinon `next_refill_time` est décrémenté.**  
+**- Chaque terminal réapprovisionne son avion s'il doit l'être.**  
+
+
 
 ### E - Paramétrage (optionnel)
 
