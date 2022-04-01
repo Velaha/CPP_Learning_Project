@@ -45,14 +45,10 @@ void TowerSimulation::create_keystrokes()
     GL::keystrokes.emplace('s', []() { GL::change_framerate(-1); });
     GL::keystrokes.emplace('p', []() { GL::toggle_pause(); });
 
-    GL::keystrokes.emplace('0', [this]() { aircraft_factory.print_flights_from_airlines(0); });
-    GL::keystrokes.emplace('1', [this]() { aircraft_factory.print_flights_from_airlines(1); });
-    GL::keystrokes.emplace('2', [this]() { aircraft_factory.print_flights_from_airlines(2); });
-    GL::keystrokes.emplace('3', [this]() { aircraft_factory.print_flights_from_airlines(3); });
-    GL::keystrokes.emplace('4', [this]() { aircraft_factory.print_flights_from_airlines(4); });
-    GL::keystrokes.emplace('5', [this]() { aircraft_factory.print_flights_from_airlines(5); });
-    GL::keystrokes.emplace('6', [this]() { aircraft_factory.print_flights_from_airlines(6); });
-    GL::keystrokes.emplace('7', [this]() { aircraft_factory.print_flights_from_airlines(7); });
+    for (int i = 0; i < 8; i++)
+    {
+        GL::keystrokes.emplace(i + '0', [i, this]() { aircraft_factory.print_flights_from_airlines(i); });
+    }
 }
 
 void TowerSimulation::display_help() const
