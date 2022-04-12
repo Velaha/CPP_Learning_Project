@@ -49,6 +49,8 @@ void TowerSimulation::create_keystrokes()
     {
         GL::keystrokes.emplace(i + '0', [i, this]() { aircraft_factory.print_flights_from_airlines(i); });
     }
+
+    GL::keystrokes.emplace('m', [this]() { aircraft_manager.get_crash(); });
 }
 
 void TowerSimulation::display_help() const

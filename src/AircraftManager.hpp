@@ -11,6 +11,7 @@ class AircraftManager : public GL::DynamicObject
 {
 private:
     std::vector<std::unique_ptr<Aircraft>> aircrafts;
+    int nbCrash = 0;
 
 public:
     AircraftManager(/* args */) {};
@@ -33,7 +34,7 @@ public:
                   });
 
         auto aircraftToDelete = std::remove_if(aircrafts.begin(), aircrafts.end(),
-                                               [](const auto& item)
+                                               [this](const auto& item)
                                                {
                                                    try
                                                    {
@@ -41,6 +42,7 @@ public:
                                                    } catch (const AircraftCrash& e)
                                                    {
                                                        std::cerr << "[!]" << e.what() << "[!]\n";
+                                                       nbCrash++;
                                                        return true;
                                                    }
                                                });
@@ -64,4 +66,6 @@ public:
                                        });
         return required;
     }
+
+    void get_crash() { std::cout << "Crashes since the beginning : " << nbCrash << std::endl; }
 };
