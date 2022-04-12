@@ -33,7 +33,17 @@ public:
                   });
 
         auto aircraftToDelete = std::remove_if(aircrafts.begin(), aircrafts.end(),
-                                               [](const auto& item) { return !item->move(); });
+                                               [](const auto& item)
+                                               {
+                                                   try
+                                                   {
+                                                       return !item->move();
+                                                   } catch (const AircraftCrash& e)
+                                                   {
+                                                       std::cerr << "[!]" << e.what() << "[!]\n";
+                                                       return true;
+                                                   }
+                                               });
         aircrafts.erase(aircraftToDelete, aircrafts.end());
 
         return true;
