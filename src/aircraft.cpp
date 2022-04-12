@@ -149,8 +149,8 @@ bool Aircraft::move()
             }
             else if (fuel <= 0)
             {
-                std::cout << flight_number << " ran out of fuel and crashed" << std::endl;
-                return false;
+                using namespace std::string_literals;
+                throw AircraftCrash { flight_number + " ran out of fuel and crashed"s };
             }
         }
 

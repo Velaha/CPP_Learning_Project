@@ -19,9 +19,14 @@ On ajoute aussi une fonction qui affiche le nombre de crash. C'est cette fonctio
 
 **3. Si vous avez fini d'implémenter la gestion du kérosène (Task_2 - Objectif 2 - A), lancez une exception de type `AircraftCrash` lorsqu'un avion tombe à court d'esssence. Normalement, cette exception devrait être traitée de la même manière que lorsqu'un avion s'écrase parce qu'il a attérit trop vite.**  
 
+A la place d'afficher un messag et retourner `false` dans `Aircraft::move`, on lance une `AircraftCrash` avec un message indiquand qu'il n'y avait plus assez de fuel.  
+Le traitement dans la fonction `move` de `AircraftManager` reste inchangé.  
+
+**4. **BONUS** Rédéfinissez `AircraftCrash` en tant que classe héritant de `std::runtime_error`, plutôt qu'en tant qu'alias. Arrangez-vous pour que son constructeur accepte le numéro de vol, la position, la vitesse de l'avion au moment du crash, et la raison du crash (`"out of fuel"` / `"bad landing"`). Vous utiliserez toutes ces informations pour générer le joli message de l'exception.**  
 
 
-4. **BONUS** Rédéfinissez `AircraftCrash` en tant que classe héritant de `std::runtime_error`, plutôt qu'en tant qu'alias. Arrangez-vous pour que son constructeur accepte le numéro de vol, la position, la vitesse de l'avion au moment du crash, et la raison du crash (`"out of fuel"` / `"bad landing"`). Vous utiliserez toutes ces informations pour générer le joli message de l'exception.
+
+
 
 ## Objectif 2 - Détecter les erreurs de programmation
 
