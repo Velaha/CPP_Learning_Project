@@ -31,6 +31,8 @@ add_executable(tower
 
 	src/AircraftManager.hpp
 	src/AircraftFactory.hpp
+
+	src/AircraftCrash.hpp
 )
 
 ###################

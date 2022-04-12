@@ -24,7 +24,9 @@ Le traitement dans la fonction `move` de `AircraftManager` reste inchangé.
 
 **4. **BONUS** Rédéfinissez `AircraftCrash` en tant que classe héritant de `std::runtime_error`, plutôt qu'en tant qu'alias. Arrangez-vous pour que son constructeur accepte le numéro de vol, la position, la vitesse de l'avion au moment du crash, et la raison du crash (`"out of fuel"` / `"bad landing"`). Vous utiliserez toutes ces informations pour générer le joli message de l'exception.**  
 
-
+On créé une classe `AircraftCrash` qui hérite de `std::runtime_error`.  
+On utilise maintenant cette classe pour remonter des exceptions à la place de l'alias initial.  
+Cette classe prend le numéro de vol, la position et la vitesse de l'avion au moment du crash ainsi qu'un message.  
 
 
 

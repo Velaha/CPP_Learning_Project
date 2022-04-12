@@ -1,5 +1,6 @@
 #pragma once
 
+#include "AircraftCrash.hpp"
 #include "GL/displayable.hpp"
 #include "aircraft_types.hpp"
 #include "config.hpp"

@@ -132,8 +132,9 @@ bool Aircraft::move()
         {
             if (!landing_gear_deployed)
             {
-                using namespace std::string_literals;
-                throw AircraftCrash { flight_number + " crashed into the ground"s };
+                // using namespace std::string_literals;
+                // throw AircraftCrash { flight_number + " crashed into the ground"s };
+                throw AircraftCrash { flight_number, pos, speed, "crashed into the ground" };
             }
         }
         else
@@ -149,8 +150,9 @@ bool Aircraft::move()
             }
             else if (fuel <= 0)
             {
-                using namespace std::string_literals;
-                throw AircraftCrash { flight_number + " ran out of fuel and crashed"s };
+                // using namespace std::string_literals;
+                // throw AircraftCrash { flight_number + " ran out of fuel and crashed"s };
+                throw AircraftCrash { flight_number, pos, speed, "ran out of fuel and crashed" };
             }
         }
 
