@@ -6,12 +6,12 @@ La fonction `Aircraft::add_waypoint` permet de rajouter une étape au début ou 
 Pour distinguer ces deux cas, elle prend un argument booléen `front` (on parle alors de "flag") qui est évalué à l'exécution.
 Votre objectif consistera à modifier cette fonction afin d'économiser cette évaluation.  
 
-1. Aujourd'hui, cette fonction n'est pas utilisée dans le code (oups).
-Du coup, pour être sûr que vos futurs changements fonctionneront correctement, commencez par modifier le code de la classe `Aircraft` de manière à remplacer :
+**1. Aujourd'hui, cette fonction n'est pas utilisée dans le code (oups).**  
+**Du coup, pour être sûr que vos futurs changements fonctionneront correctement, commencez par modifier le code de la classe `Aircraft` de manière à remplacer :**  
 ```cpp
 waypoints = control.get_instructions(*this);
 ```
-par
+**par**  
 ```cpp
 auto front = false;
 for (const auto& wp: control.get_instructions(*this))
@@ -20,8 +20,13 @@ for (const auto& wp: control.get_instructions(*this))
 }
 ```
 
-2. Modifiez `Aircraft::add_waypoint` afin que l'évaluation du flag ait lieu à la compilation et non à l'exécution.
-Que devez-vous changer dans l'appel de la fonction pour que le programme compile ?
+On modifie cette partie du code.  
+Le programme compile et se comporte de manière identique.  
+
+**2. Modifiez `Aircraft::add_waypoint` afin que l'évaluation du flag ait lieu à la compilation et non à l'exécution.**  
+**Que devez-vous changer dans l'appel de la fonction pour que le programme compile ?**  
+
+
 
 3. **BONUS** En utilisant [GodBolt](https://godbolt.org/), comparez le code-assembleur généré par les fonctions suivantes:
 <table border="0">
