@@ -24,6 +24,8 @@ private:
     bool served                = false;
     int fuel                   = std::rand() % ((3000 - 150) + 1) + 150; // random value between 150 and 3000
 
+    static constexpr bool front = false;
+
     // turn the aircraft to arrive at the next waypoint
     // try to facilitate reaching the waypoint after the next by facing the
     // right way to this end, we try to face the point Z on the line spanned by
@@ -40,7 +42,7 @@ private:
     void arrive_at_terminal();
     // deploy and retract landing gear depending on next waypoints
     void operate_landing_gear();
-    void add_waypoint(const Waypoint& wp, const bool front);
+    void add_waypoint(const Waypoint& wp);
     bool is_on_ground() const { return pos.z() < DISTANCE_THRESHOLD; }
     float max_speed() const { return is_on_ground() ? type.max_ground_speed : type.max_air_speed; }
 

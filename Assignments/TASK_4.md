@@ -26,9 +26,11 @@ Le programme compile et se comporte de manière identique.
 **2. Modifiez `Aircraft::add_waypoint` afin que l'évaluation du flag ait lieu à la compilation et non à l'exécution.**  
 **Que devez-vous changer dans l'appel de la fonction pour que le programme compile ?**  
 
+Pour que l'évaluation se fasse à la compilation et non à l'exécution, il faut utiliser on `if constexpr` à la place d'un `if` simple.  
+Pour cela il faut que `front` soit une constante. J'en ai donc fait un attribut `static constexpr` de la classe `Aircraft`.  
+Comme `front` est maintenant un attribut, je retire le paramètre `const bool front` de la fonction `add_waypoint`.  
 
-
-3. **BONUS** En utilisant [GodBolt](https://godbolt.org/), comparez le code-assembleur généré par les fonctions suivantes:
+**3. **BONUS** En utilisant [GodBolt](https://godbolt.org/), comparez le code-assembleur généré par les fonctions suivantes:**  
 <table border="0">
  <tr>
     <td><pre lang="c++">
@@ -44,6 +46,9 @@ Le programme compile et se comporte de manière identique.
     </pre></td>
  </tr>
 </table>
+
+La version avec un `template` génère un code assembleur beaucoup plus concis que la version sans `template`.  
+
 
 ### Objectif 2 - Points génériques
 
