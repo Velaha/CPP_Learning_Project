@@ -38,3 +38,6 @@ Voici quelques idées :
 - état attendu d'un objet lorsqu'une fonction est appelée dessus
 - vérification de certains paramètres de fonctions
 - ...
+
+On rajoute des `assert(...)` dans plusieurs fonctions afin de sécuriser le code.  
+On vérifie ainsi que les paramètres donnés aux fonctions ne sont pas nuls.  

@@ -3,6 +3,7 @@
 #include "aircraft.hpp"
 
 #include <algorithm>
+#include <cassert>
 #include <memory>
 #include <numeric>
 #include <vector>
@@ -51,7 +52,11 @@ public:
         return true;
     }
 
-    void add(std::unique_ptr<Aircraft> aircraft) { aircrafts.emplace_back(std::move(aircraft)); }
+    void add(std::unique_ptr<Aircraft> aircraft)
+    {
+        assert(aircraft);
+        aircrafts.emplace_back(std::move(aircraft));
+    }
 
     int get_required_fuel() const
     {

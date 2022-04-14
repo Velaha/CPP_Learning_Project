@@ -49,6 +49,7 @@ public:
 
     std::unique_ptr<Aircraft> create_random_aircraft(Airport* airport)
     {
+        assert(airport);
         return create_aircraft(airport, *(aircraft_types[rand() % 3]));
     }
 
