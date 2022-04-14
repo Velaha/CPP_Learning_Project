@@ -52,11 +52,14 @@ La version avec un `template` génère un code assembleur beaucoup plus concis q
 
 ### Objectif 2 - Points génériques
 
-1. Reprenez les classes dans `geometry.hpp` et inspirez-vous de `Point2D` et `Point3D` pour définir une unique classe-template `Point` paramétrée par la dimension (nombre de coordonnées) et leur type (entier/float/double).
-Pour ce qui est des constructeurs, vous n'ajouterez pour le moment que le constructeur par défaut.
+**1. Reprenez les classes dans `geometry.hpp` et inspirez-vous de `Point2D` et `Point3D` pour définir une unique classe-template `Point` paramétrée par la dimension (nombre de coordonnées) et leur type (entier/float/double).**  
+**Pour ce qui est des constructeurs, vous n'ajouterez pour le moment que le constructeur par défaut.**  
 
-2. Ajoutez une fonction libre `test_generic_points` à votre programme, que vous appelerez depuis le `main`. 
-Placez le code suivant dans cette fonction et modifiez-le plusieurs fois, pour vérifier que le compilateur est capable de générer des classes à partir de votre template sans problème :
+On définie une classe-template `Point` paramétrée par un `size_t` représentant la dimension du point et un `typename` représentant le type des coordonnées du point (int, float, double).  
+On ne possède pour l'instant qu'un constructeur et un destructeur par défauts.  
+
+**2. Ajoutez une fonction libre `test_generic_points` à votre programme, que vous appelerez depuis le `main`.**   
+**Placez le code suivant dans cette fonction et modifiez-le plusieurs fois, pour vérifier que le compilateur est capable de générer des classes à partir de votre template sans problème :**  
 ```cpp
 Point<...> p1;
 Point<...> p2;
@@ -64,6 +67,8 @@ auto p3 = p1 + p2;
 p1 += p2;
 p1 *= 3; // ou 3.f, ou 3.0 en fonction du type de Point
 ```
+
+
 
 3. Ajoutez le constructeur à 2 paramètres de `Point2D` et le constructeur à 3 paramètres de `Point3D` dans votre classe-template.
 Modifiez `Point2D` et `Point3D` afin d'en faire des alias sur des classes générées à partir du template `Point` (respectivement, 2 floats et 3 floats).

@@ -33,6 +33,8 @@ add_executable(tower
 	src/AircraftFactory.hpp
 
 	src/AircraftCrash.hpp
+
+	src/Point.hpp
 )
 
 ###################
