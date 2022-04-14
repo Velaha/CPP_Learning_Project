@@ -32,12 +32,12 @@ Cette classe prend le numéro de vol, la position et la vitesse de l'avion au mo
 
 ## Objectif 2 - Détecter les erreurs de programmation
 
-Pour sécuriser votre code, repassez sur les différentes fonctions de votre programme et ajoutez des assertions permettant de vérifier qu'elles sont correctement utilisées.
-Voici quelques idées :
-- fonctions d'initialisation appelées une seule fois
-- état attendu d'un objet lorsqu'une fonction est appelée dessus
-- vérification de certains paramètres de fonctions
-- ...
+**Pour sécuriser votre code, repassez sur les différentes fonctions de votre programme et ajoutez des assertions permettant de vérifier qu'elles sont correctement utilisées.**  
+**Voici quelques idées :**  
+**- fonctions d'initialisation appelées une seule fois**  
+**- état attendu d'un objet lorsqu'une fonction est appelée dessus**  
+**- vérification de certains paramètres de fonctions**  
+**- ...**  
 
 On rajoute des `assert(...)` dans plusieurs fonctions afin de sécuriser le code.  
 On vérifie ainsi que les paramètres donnés aux fonctions ne sont pas nuls.  
