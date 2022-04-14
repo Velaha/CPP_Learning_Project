@@ -68,11 +68,14 @@ p1 += p2;
 p1 *= 3; // ou 3.f, ou 3.0 en fonction du type de Point
 ```
 
+On ajoute toutes les fonctions présentent dans `Point2D` et `Point3D` dans la classe-template `Point` de manière à ce que `test_generic_points` ne provoque plus d'erreurs.  
+Ces fonctions doivent pouvoir s'adapter selon que la dimension soit 2D ou 3D, ainsi on modifie légèrement la fonction `Point operator-() const` de manière à ne plus utiliser de variables x, y et z.  
+
+**3. Ajoutez le constructeur à 2 paramètres de `Point2D` et le constructeur à 3 paramètres de `Point3D` dans votre classe-template.**  
+**Modifiez `Point2D` et `Point3D` afin d'en faire des alias sur des classes générées à partir du template `Point` (respectivement, 2 floats et 3 floats).**  
+**Vérifiez que votre programme compile et fonctionne comme avant.**  
 
 
-3. Ajoutez le constructeur à 2 paramètres de `Point2D` et le constructeur à 3 paramètres de `Point3D` dans votre classe-template.
-Modifiez `Point2D` et `Point3D` afin d'en faire des alias sur des classes générées à partir du template `Point` (respectivement, 2 floats et 3 floats).
-Vérifiez que votre programme compile et fonctionne comme avant.
 
 4. Dans la fonction `test_generic_points`, essayez d'instancier un `Point2D` avec 3 arguments.
 Que se passe-t-il ?
