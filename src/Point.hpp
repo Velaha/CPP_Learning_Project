@@ -17,17 +17,33 @@ public:
     Point(/* args */) = default;
     ~Point()          = default;
 
-    Point(Type e1, Type e2) : values { e1, e2 } {}
-    Point(Type e1, Type e2, Type e3) : values { e1, e2, e3 } {}
+    Point(Type e1, Type e2) : values { e1, e2 } { static_assert(Dimension == 2); }
+    Point(Type e1, Type e2, Type e3) : values { e1, e2, e3 } { static_assert(Dimension == 3); }
 
     Type& x() { return values[0]; }
     Type x() const { return values[0]; }
 
-    Type& y() { return values[1]; }
-    Type y() const { return values[1]; }
+    Type& y()
+    {
+        static_assert(Dimension >= 2);
+        return values[1];
+    }
+    Type y() const
+    {
+        static_assert(Dimension >= 2);
+        return values[1];
+    }
 
-    Type& z() { return values[2]; }
-    Type z() const { return values[2]; }
+    Type& z()
+    {
+        static_assert(Dimension >= 3);
+        return values[2];
+    }
+    Type z() const
+    {
+        static_assert(Dimension >= 3);
+        return values[2];
+    }
 
     Point<Dimension, Type>& operator+=(const Point<Dimension, Type>& other)
     {
