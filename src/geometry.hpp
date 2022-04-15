@@ -1,5 +1,7 @@
 #pragma once
 
+#include "Point.hpp"
+
 #include <algorithm>
 #include <array>
 #include <cassert>
@@ -7,7 +9,7 @@
 #include <iostream>
 #include <numeric>
 
-struct Point2D
+/* struct Point2D
 {
     float values[2] {};
 
@@ -62,8 +64,9 @@ struct Point2D
         return result;
     }
 };
+*/
 
-struct Point3D
+/*struct Point3D
 {
     std::array<float, 3> values {};
 
@@ -166,6 +169,10 @@ struct Point3D
         return *this;
     }
 };
+*/
+
+using Point2D = Point<2, float>;
+using Point3D = Point<3, float>;
 
 // our 3D-coordinate system will be tied to the airport: the runway is parallel to the x-axis, the z-axis
 // points towards the sky, and y is perpendicular to both thus,

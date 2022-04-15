@@ -75,11 +75,26 @@ Ces fonctions doivent pouvoir s'adapter selon que la dimension soit 2D ou 3D, ai
 **Modifiez `Point2D` et `Point3D` afin d'en faire des alias sur des classes générées à partir du template `Point` (respectivement, 2 floats et 3 floats).**  
 **Vérifiez que votre programme compile et fonctionne comme avant.**  
 
+On ajoute deux constructeurs à la classe-template, l'un à deux paramètres et l'autre à trois paramètres.  
+
+On fait de `Point2D` et `Point3D` des alias pour, respectivement `Point<2, float>` et `Point<3, float>`.  
+
+Le programme ne compile pas directement. Le fichier `texture.hpp` pose problème.  
+Pour y remédier j'implémente des fonctions de `Point2D` que j'avais oublié, puis je modifie la ligne 
+```cpp
+glVertex2fv(vertex.values);
+```
+par 
+```cpp
+glVertex2fv(vertex.values.data());
+```   
+En effet, `glVertex2fv()` a visiblement besoin d'un tableau constant comme `values[2]` ce qui ne correspond pas à un tableau comme `std::array<[type], 2>`. La méthode `data()` de `std::array` permet de fournir un tableau constant équivalent.  
+
+**4. Dans la fonction `test_generic_points`, essayez d'instancier un `Point2D` avec 3 arguments.**  
+**Que se passe-t-il ?**  
+**Comment pourriez-vous expliquer que cette erreur ne se produise que maintenant ?**  
 
 
-4. Dans la fonction `test_generic_points`, essayez d'instancier un `Point2D` avec 3 arguments.
-Que se passe-t-il ?
-Comment pourriez-vous expliquer que cette erreur ne se produise que maintenant ?
 
 5. Que se passe-t-il maintenant si vous essayez d'instancier un `Point3D` avec 2 arguments ?
 Utilisez un `static_assert` afin de vous assurez que personne ne puisse initialiser un `Point3D` avec seulement deux éléments.

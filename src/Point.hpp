@@ -4,18 +4,30 @@
 #include <array>
 #include <cassert>
 #include <cmath>
-#include <cstddef>
 #include <numeric>
 
 template <size_t Dimension, typename Type> class Point
 {
 private:
     /* data */
-    std::array<Type, Dimension> values {};
 
 public:
+    std::array<Type, Dimension> values {};
+
     Point(/* args */) = default;
     ~Point()          = default;
+
+    Point(Type e1, Type e2) : values { e1, e2 } {}
+    Point(Type e1, Type e2, Type e3) : values { e1, e2, e3 } {}
+
+    Type& x() { return values[0]; }
+    Type x() const { return values[0]; }
+
+    Type& y() { return values[1]; }
+    Type y() const { return values[1]; }
+
+    Type& z() { return values[2]; }
+    Type z() const { return values[2]; }
 
     Point<Dimension, Type>& operator+=(const Point<Dimension, Type>& other)
     {
@@ -28,6 +40,13 @@ public:
     {
         std::transform(values.begin(), values.end(), other.values.begin(), values.begin(),
                        std::minus<Type>());
+        return *this;
+    }
+
+    Point& operator*=(const Point& other)
+    {
+        std::transform(values.begin(), values.end(), other.values.begin(), values.begin(),
+                       std::multiplies<Type>());
         return *this;
     }
 
@@ -52,6 +71,13 @@ public:
         return result;
     }
 
+    Point operator*(const Point& other) const
+    {
+        Point result = *this;
+        result *= other;
+        return result;
+    }
+
     Point operator*(const float scalar) const
     {
         Point result = *this;
@@ -59,11 +85,7 @@ public:
         return result;
     }
 
-    Point operator-() const
-    {
-        std::transform(values.begin(), values.end(), values.begin(), [](Type value) { return -value; });
-        return *this;
-    }
+    Point operator-() const { return Point<Dimension, Type>(-x(), -y(), -z()); }
 
     float length() const
     {
