@@ -110,6 +110,11 @@ On ajoute des `static_assert` dans les constructeurs et les fonctions `y()` et `
 **En faisant ça, vous aurez peut-être désormais des problèmes avec la copie des `Point`.**  
 **Que pouvez-vous faire pour supprimer l'ambiguité ?**  
 
+J'ai essayé d'implémenter la classe `Point` avec un variadic-template et du perfect-forwarding mais n'ai malheureusement pas réussi.  
+Il y a un problème de conversion au moment du `std::forward` : le compilateur comprends que je veux lui faire convertir un `Point<Dimension, Type>` en `Type` ce qui n'est pas possible.  
+Je n'ai pas réussi à corriger ce soucis.  
 
 
-7. **BONUS** En utilisant SFINAE, faites en sorte que le template `Point` ne puisse être instancié qu'avec des types [arithmétiques](https://en.cppreference.com/w/cpp/types/is_arithmetic).
+**7. **BONUS** En utilisant SFINAE, faites en sorte que le template `Point` ne puisse être instancié qu'avec des types [arithmétiques](https://en.cppreference.com/w/cpp/types/is_arithmetic).**  
+
+
