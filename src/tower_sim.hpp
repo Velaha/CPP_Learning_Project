@@ -19,6 +19,9 @@ struct ContextInitializer
 class TowerSimulation
 {
 private:
+    bool contextInitialised = false;
+    bool airportInitialised = false;
+
     bool help        = false;
     Airport* airport = nullptr;
     ContextInitializer context_initializer;

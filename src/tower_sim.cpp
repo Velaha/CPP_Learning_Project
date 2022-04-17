@@ -19,7 +19,9 @@ TowerSimulation::TowerSimulation(int argc, char** argv) :
     help { (argc > 1) && (std::string { argv[1] } == "--help"s || std::string { argv[1] } == "-h"s) },
     context_initializer(argc, argv)
 {
+    assert(!contextInitialised);
     create_keystrokes();
+    contextInitialised = true;
 }
 
 TowerSimulation::~TowerSimulation()
@@ -68,12 +70,14 @@ void TowerSimulation::display_help() const
 
 void TowerSimulation::init_airport()
 {
+    assert(!airportInitialised);
     airport =
         new Airport { one_lane_airport, Point3D { 0, 0, 0 },
                       new img::Image { one_lane_airport_sprite_path.get_full_path() }, aircraft_manager };
 
     GL::move_queue.emplace(airport);
     GL::move_queue.emplace(&aircraft_manager);
+    airportInitialised = true;
 }
 
 void TowerSimulation::launch()
